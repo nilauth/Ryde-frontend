@@ -16,8 +16,8 @@ import LoginPage from "@/common/loginPage";
 import RegisterPage from "@/common/registerPage";
 import AdminProfile from "@/admin/pages/adminProfilePage";
 import PaymentsPage from "@/admin/pages/paymentsPage";
-import AcceuilClient from "@/client/pages/acceuilClient";
-import ReservationClient from "@/client/pages/reservationClient";
+import AcceuilClient from "@/client/pages/acceuilClientPage";
+import ReservationClient from "@/client/pages/reservationClientPage";
 
 const router = createBrowserRouter([
   {

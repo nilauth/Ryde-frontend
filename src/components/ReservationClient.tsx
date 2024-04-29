@@ -1,5 +1,8 @@
 import { Search } from "lucide-react";
 import { Link } from "react-router-dom";
+import DatePicker from "@/components/DatePicker";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
 
 export default function ReservationClient() {
   return (
@@ -12,7 +15,7 @@ export default function ReservationClient() {
               <label className='text-sm font-medium' htmlFor='start-city'>
                 Ville de départ
               </label>
-              <input
+              <Input
                 className='w-full px-4 py-3 rounded-md border border-gray-300 focus:border-primary focus:ring-primary dark:bg-gray-800 dark:border-gray-700 dark:focus:border-primary'
                 id='start-city'
                 placeholder='Entrer ville de départ'
@@ -23,28 +26,27 @@ export default function ReservationClient() {
               <label className='text-sm font-medium' htmlFor='end-city'>
                 Ville d'arrivée
               </label>
-              <input
+              <Input
                 className='w-full px-4 py-3 rounded-md border border-gray-300 focus:border-primary focus:ring-primary dark:bg-gray-800 dark:border-gray-700 dark:focus:border-primary'
                 id='end-city'
                 placeholder="Entrer Ville d'arrivée"
                 type='text'
               />
             </div>
-            <div className='space-y-2'>
+            <div className='space-y-2 flex justify-between items-center md:block md:w-fit'>
               <label className='text-sm font-medium' htmlFor='date'>
                 Date
               </label>
-              <input
-                className='w-full px-4 py-3 rounded-md border border-gray-300 focus:border-primary focus:ring-primary dark:bg-gray-800 dark:border-gray-700 dark:focus:border-primary'
-                id='date'
-                type='date'
-              />
+              <DatePicker />
             </div>
-            <div className='space-y-2'>
+            <div
+              className='space-y-2
+            '
+            >
               <label className='text-sm font-medium' htmlFor='passengers'>
                 Passagers
               </label>
-              <input
+              <Input
                 className='w-full px-4 py-3 rounded-md border border-gray-300 focus:border-primary focus:ring-primary dark:bg-gray-800 dark:border-gray-700 dark:focus:border-primary'
                 id='passengers'
                 min='1'
@@ -52,16 +54,16 @@ export default function ReservationClient() {
                 type='text'
               />
             </div>
-            <Link
-              className='self-end h-fit md:col-span-1 bg-primary hover:bg-primary-dark text-white font-medium py-3 px-6 rounded-md transition-colors duration-300 flex items-center justify-center hover:bg-primary/95'
-              type='submit'
-              to='/course/reservation'
-            >
-              <div className=' flex gap-2 justify-center items-center'>
-                Rechercher
-                <Search className='h-4 w-4' />
-              </div>
-            </Link>
+            <div className='flex items-end w-full '>
+              <Link className='w-full' to='/course/reservation'>
+                <Button type='submit' className='w-full'>
+                  <div className=' flex gap-6 justify-between items-center'>
+                    Rechercher
+                    <Search className='h-4 w-4' />
+                  </div>
+                </Button>
+              </Link>
+            </div>
           </form>
         </div>
       </div>
