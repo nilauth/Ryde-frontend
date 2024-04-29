@@ -1,22 +1,21 @@
-import LogoSVG from "@/components/LogoSvg";
+import Footer from "@/components/Footer";
 import ReservationClient from "@/components/ReservationClient";
 import UserNavigation from "@/components/UserNavigation";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";
-import { Link } from "react-router-dom";
 
 export default function AcceuilClient() {
   return (
     <>
-      <UserNavigation />
+      <UserNavigation isAuth={false} />
       <section className='py-12 md:py-16'>
         <div className='container mx-auto px-4 md:px-6'>
           <div className='grid md:grid-cols-2 gap-8 items-start '>
             <div>
               <h1 className='text-4xl lg:text-8xl font-bold mb-4 text-center md:text-start'>
                 Simplifiez vos déplacements avec{" "}
-                <span className='text-5xl lg:text-9xl italic bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text'>
+                <span className='p-2 text-5xl lg:text-9xl italic bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text'>
                   Ryde
                 </span>
               </h1>
@@ -27,7 +26,7 @@ export default function AcceuilClient() {
             </div>
             <img
               alt='Ryde'
-              className='rounded-sm'
+              className=' rounded-sm none md:block'
               height={650}
               src='/main-pic.jpg'
               style={{
@@ -40,9 +39,9 @@ export default function AcceuilClient() {
         </div>
       </section>
       <ReservationClient />
-      <section className='py-12 md:py-40 bg-white'>
+      <section className='py-12 md:pt-30 md:pb-60 bg-white'>
         <div className='container mx-auto px-4 md:px-6'>
-          <h2 className='text-2xl md:text-3xl font-bold mb-16 text-center text-gray-950'>
+          <h2 className='text-2xl md:text-5xl md:py-20 font-bold mb-16 text-center text-gray-950'>
             Principales fonctionnalités
           </h2>
           <div className='grid md:grid-cols-3 gap-8'>
@@ -68,9 +67,9 @@ export default function AcceuilClient() {
           </div>
         </div>
       </section>
-      <section className='bg-slate-50 py-12 md:py-40'>
+      <section className='bg-slate-50 py-12 md:pt-30 md:pb-60'>
         <div className='container mx-auto px-4 md:px-6'>
-          <h2 className='text-2xl md:text-3xl font-bold mb-16 text-center'>Témoignages d'utilisateurs</h2>
+          <h2 className='text-2xl md:text-5xl md:py-20 font-bold mb-16 text-center'>Témoignages d'utilisateurs</h2>
           <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-8'>
             <Card>
               <CardContent className='p-6'>
@@ -129,9 +128,9 @@ export default function AcceuilClient() {
           </div>
         </div>
       </section>
-      <section className='py-12 md:py-40'>
+      <section className='py-12 md:pt-30 md:pb-60'>
         <div className='container mx-auto px-4 md:px-6'>
-          <h2 className='text-2xl md:text-3xl font-bold mb-16 text-center'>Les avantages du covoiturage</h2>
+          <h2 className='text-2xl md:text-5xl md:py-20 font-bold mb-16 text-center'>Les avantages du covoiturage</h2>
           <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-8'>
             <div className='bg-white rounded-lg shadow-md p-6 border'>
               <DollarSignIcon className='h-8 w-8 mb-4 text-blue-500' />
@@ -160,10 +159,10 @@ export default function AcceuilClient() {
           </div>
         </div>
       </section>
-      <section className='bg-slate-50 py-12 md:py-40'>
+      <section className='bg-slate-50 py-12 md:pt-30  md:pb-60'>
         <div className='container mx-auto px-4 md:px-6 flex justify-center items-center flex-col'>
-          <h2 className='text-2xl md:text-3xl font-bold mb-16 text-center'>Questions fréquentes</h2>
-          <Accordion className='w-[1000px]' collapsible type='single'>
+          <h2 className='text-2xl md:text-5xl font-bold mb-16 md:py-10 text-center'>Questions fréquentes</h2>
+          <Accordion className='md:w-[1000px] w-full' collapsible type='single'>
             <AccordionItem value='question1'>
               <AccordionTrigger className='text-base md:text-2xl'>Comment fonctionne Ryde ?</AccordionTrigger>
               <AccordionContent>
@@ -199,32 +198,7 @@ export default function AcceuilClient() {
           </Accordion>
         </div>
       </section>
-      <footer className='bg-black  text-white py-10 px-4 md:px-6'>
-        <div className='container mx-auto flex flex-col md:flex-row items-center justify-between'>
-          <div className='flex items-center mb-4 md:mb-0 gap-x-2'>
-            <LogoSVG color='white' />
-            <span className='text-xl font-bold'>Ryde</span>
-          </div>
-          <nav className='flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4'>
-            <Link className='hover:underline' to='#'>
-              Mentions légales
-            </Link>
-            <Link className='hover:underline' to='#'>
-              Politique de confidentialité
-            </Link>
-            <Link className='hover:underline' to='#'>
-              Nous contacter
-            </Link>
-            <Link className='hover:underline' to='#'>
-              À propos
-            </Link>
-            <Link className='hover:underline' to='#'>
-              Carrières
-            </Link>
-          </nav>
-          <p className='text-gray-100 text-sm mt-4 md:mt-0'>© 2024 Ryde. Tous droits réservés.</p>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }
