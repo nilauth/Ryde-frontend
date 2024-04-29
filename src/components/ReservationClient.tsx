@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 export default function ReservationClient() {
   return (
-    <section className=' dark:bg-gray-800 mb-20'>
-      <h2 className='text-4xl md:text-3xl font-bold mb-6 text-center'>Trouvez votre prochain trajet</h2>
+    <section className=' dark:bg-gray-800 pt-5 pb-20 bg-yellow-300'>
+      <h2 className='text-4xl md:text-4xl font-bold mb-6 text-center'>Trouvez votre prochain trajet</h2>
       <div className='container mx-auto px-4 md:px-6'>
-        <div className='max-w-6xl mx-auto bg-white dark:bg-gray-900 rounded-full lg:shadow-md p-6 md:p-8 lg:p-10'>
+        <div className='max-w-6xl mx-auto bg-white dark:bg-gray-900 rounded-2xl lg:shadow-md p-6 md:p-8 lg:p-10'>
           <form className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-6 mx-4'>
             <div className='space-y-2'>
               <label className='text-sm font-medium' htmlFor='start-city'>

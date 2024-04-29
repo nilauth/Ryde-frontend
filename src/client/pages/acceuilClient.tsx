@@ -10,29 +10,26 @@ export default function AcceuilClient() {
   return (
     <>
       <UserNavigation />
-      <section className='py-12 md:py-20'>
+      <section className='py-12 md:py-16'>
         <div className='container mx-auto px-4 md:px-6'>
-          <div className='grid md:grid-cols-2 gap-8 items-center'>
+          <div className='grid md:grid-cols-2 gap-8 items-start '>
             <div>
-              <h1 className='text-2xl md:text-5xl font-bold mb-4'>Simplifiez vos déplacements avec Ryde</h1>
-              <p className='text-gray-600 mb-6 pr-20 mt-10'>
+              <h1 className='text-4xl lg:text-8xl font-bold mb-4 text-center md:text-start'>
+                Simplifiez vos déplacements avec{" "}
+                <span className='text-5xl lg:text-9xl italic bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text'>
+                  Ryde
+                </span>
+              </h1>
+              <p className='text-gray-600 mb-6 md:pr-20 mt-10 text-xl leading-8 text-center md:text-start'>
                 Trouvez facilement des conducteurs ou des passagers pour partager vos trajets et réduisez vos coûts de
                 transport.
               </p>
-              {/* <div className='space-x-4'>
-                <Button className='bg-blue-500 hover:bg-blue-600' variant='solid'>
-                  S'inscrire
-                </Button>
-                <Button className='text-blue-500 hover:bg-blue-500 hover:text-white' variant='outline'>
-                  Télécharger
-                </Button>
-              </div> */}
             </div>
             <img
               alt='Ryde'
-              className='rounded-lg'
+              className='rounded-sm'
               height={650}
-              src='/public/main-pic.jpg'
+              src='/main-pic.jpg'
               style={{
                 aspectRatio: "600/400",
                 objectFit: "cover",
@@ -43,25 +40,27 @@ export default function AcceuilClient() {
         </div>
       </section>
       <ReservationClient />
-      <section className='py-12 md:py-20 bg-gray-100'>
+      <section className='py-12 md:py-40 bg-white'>
         <div className='container mx-auto px-4 md:px-6'>
-          <h2 className='text-2xl md:text-3xl font-bold mb-8 text-center'>Principales fonctionnalités</h2>
+          <h2 className='text-2xl md:text-3xl font-bold mb-16 text-center text-gray-950'>
+            Principales fonctionnalités
+          </h2>
           <div className='grid md:grid-cols-3 gap-8'>
-            <div className='bg-white rounded-lg shadow-md p-6'>
+            <div className='bg-white rounded-lg shadow-md p-6 border'>
               <MapPinIcon className='h-8 w-8 mb-4 text-blue-500' />
               <h3 className='text-xl font-bold mb-2'>Recherche de trajets</h3>
               <p className='text-gray-600'>
                 Trouvez facilement des conducteurs ou des passagers pour vos trajets quotidiens ou occasionnels.
               </p>
             </div>
-            <div className='bg-white rounded-lg shadow-md p-6'>
+            <div className='bg-white rounded-lg shadow-md p-6 border'>
               <CalendarCheckIcon className='h-8 w-8 mb-4 text-blue-500' />
               <h3 className='text-xl font-bold mb-2'>Planification des trajets</h3>
               <p className='text-gray-600'>
                 Planifiez vos trajets à l'avance et coordonnez-vous avec vos covoitureurs.
               </p>
             </div>
-            <div className='bg-white rounded-lg shadow-md p-6'>
+            <div className='bg-white rounded-lg shadow-md p-6 border'>
               <TextIcon className='h-8 w-8 mb-4 text-blue-500' />
               <h3 className='text-xl font-bold mb-2'>Messagerie intégrée</h3>
               <p className='text-gray-600'>Communiquez facilement avec vos covoitureurs pour organiser vos trajets.</p>
@@ -69,9 +68,9 @@ export default function AcceuilClient() {
           </div>
         </div>
       </section>
-      <section className='bg-gray-100 py-12 md:py-20'>
+      <section className='bg-slate-50 py-12 md:py-40'>
         <div className='container mx-auto px-4 md:px-6'>
-          <h2 className='text-2xl md:text-3xl font-bold mb-8 text-center'>Témoignages d'utilisateurs</h2>
+          <h2 className='text-2xl md:text-3xl font-bold mb-16 text-center'>Témoignages d'utilisateurs</h2>
           <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-8'>
             <Card>
               <CardContent className='p-6'>
@@ -130,30 +129,30 @@ export default function AcceuilClient() {
           </div>
         </div>
       </section>
-      <section className='py-12 md:py-20'>
+      <section className='py-12 md:py-40'>
         <div className='container mx-auto px-4 md:px-6'>
-          <h2 className='text-2xl md:text-3xl font-bold mb-8 text-center'>Les avantages du covoiturage</h2>
+          <h2 className='text-2xl md:text-3xl font-bold mb-16 text-center'>Les avantages du covoiturage</h2>
           <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-8'>
-            <div className='bg-white rounded-lg shadow-md p-6'>
+            <div className='bg-white rounded-lg shadow-md p-6 border'>
               <DollarSignIcon className='h-8 w-8 mb-4 text-blue-500' />
               <h3 className='text-xl font-bold mb-2'>Économies</h3>
               <p className='text-gray-600'>
                 Partagez les frais de transport avec d'autres personnes et réduisez vos dépenses.
               </p>
             </div>
-            <div className='bg-white rounded-lg shadow-md p-6'>
+            <div className='bg-white rounded-lg shadow-md p-6 border'>
               <RecycleIcon className='h-8 w-8 mb-4 text-blue-500' />
               <h3 className='text-xl font-bold mb-2'>Écologie</h3>
               <p className='text-gray-600'>
                 Contribuez à la réduction de l'empreinte carbone en partageant vos trajets.
               </p>
             </div>
-            <div className='bg-white rounded-lg shadow-md p-6'>
+            <div className='bg-white rounded-lg shadow-md p-6 border'>
               <UsersIcon className='h-8 w-8 mb-4 text-blue-500' />
               <h3 className='text-xl font-bold mb-2'>Sociabilité</h3>
               <p className='text-gray-600'>Rencontrez de nouvelles personnes et créez des liens sociaux.</p>
             </div>
-            <div className='bg-white rounded-lg shadow-md p-6'>
+            <div className='bg-white rounded-lg shadow-md p-6 border'>
               <ClockIcon className='h-8 w-8 mb-4 text-blue-500' />
               <h3 className='text-xl font-bold mb-2'>Gain de temps</h3>
               <p className='text-gray-600'>Évitez les embouteillages et gagnez du temps sur vos trajets.</p>
@@ -161,14 +160,14 @@ export default function AcceuilClient() {
           </div>
         </div>
       </section>
-      <section className='bg-gray-100 py-12 md:py-20'>
+      <section className='bg-slate-50 py-12 md:py-40'>
         <div className='container mx-auto px-4 md:px-6 flex justify-center items-center flex-col'>
-          <h2 className='text-2xl md:text-3xl font-bold mb-8 text-center'>Questions fréquentes</h2>
-          <Accordion className='w-[600px]' collapsible type='single'>
+          <h2 className='text-2xl md:text-3xl font-bold mb-16 text-center'>Questions fréquentes</h2>
+          <Accordion className='w-[1000px]' collapsible type='single'>
             <AccordionItem value='question1'>
-              <AccordionTrigger className='text-base'>Comment fonctionne Ryde ?</AccordionTrigger>
+              <AccordionTrigger className='text-base md:text-2xl'>Comment fonctionne Ryde ?</AccordionTrigger>
               <AccordionContent>
-                <p className='text-gray-600'>
+                <p className='text-gray-600 md:text-xl'>
                   Ryde vous permet de trouver facilement des conducteurs ou des passagers pour partager vos trajets.
                   Vous pouvez publier vos trajets, consulter les offres disponibles et communiquer avec les autres
                   utilisateurs pour organiser vos déplacements.
@@ -176,18 +175,22 @@ export default function AcceuilClient() {
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value='question2'>
-              <AccordionTrigger className='text-base'>Quels sont les avantages du covoiturage ?</AccordionTrigger>
+              <AccordionTrigger className='text-base md:text-2xl'>
+                Quels sont les avantages du covoiturage ?
+              </AccordionTrigger>
               <AccordionContent>
-                <p className='text-gray-600'>
+                <p className='text-gray-600 md:text-xl'>
                   Le covoiturage vous permet de réaliser des économies, de réduire votre empreinte carbone, de
                   rencontrer de nouvelles personnes et de gagner du temps en évitant les embouteillages.
                 </p>
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value='question3'>
-              <AccordionTrigger className='text-base'>Comment puis-je m'inscrire sur Ryde ?</AccordionTrigger>
+              <AccordionTrigger className='text-base md:text-2xl'>
+                Comment puis-je m'inscrire sur Ryde ?
+              </AccordionTrigger>
               <AccordionContent>
-                <p className='text-gray-600'>
+                <p className='text-gray-600 md:text-xl'>
                   Vous pouvez vous inscrire sur Ryde en cliquant sur le bouton "S'inscrire" en haut de la page. Vous
                   devrez remplir un formulaire avec vos informations personnelles et vos préférences de trajet.
                 </p>
@@ -196,7 +199,7 @@ export default function AcceuilClient() {
           </Accordion>
         </div>
       </section>
-      <footer className='bg-gray-900 text-white py-6 px-4 md:px-6'>
+      <footer className='bg-black  text-white py-10 px-4 md:px-6'>
         <div className='container mx-auto flex flex-col md:flex-row items-center justify-between'>
           <div className='flex items-center mb-4 md:mb-0 gap-x-2'>
             <LogoSVG color='white' />
@@ -219,7 +222,7 @@ export default function AcceuilClient() {
               Carrières
             </Link>
           </nav>
-          <p className='text-gray-500 text-sm mt-4 md:mt-0'>© 2024 Ryde. Tous droits réservés.</p>
+          <p className='text-gray-100 text-sm mt-4 md:mt-0'>© 2024 Ryde. Tous droits réservés.</p>
         </div>
       </footer>
     </>

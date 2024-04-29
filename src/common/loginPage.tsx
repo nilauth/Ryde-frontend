@@ -8,7 +8,7 @@ export default function LoginPage() {
     <div className='w-full h-screen lg:grid lg:grid-cols-2'>
       <div className='hidden bg-muted lg:block'>
         <img
-          src='/public/login-image.jpg'
+          src='/login-image.jpg'
           alt='Image'
           width='1920'
           height='1080'
