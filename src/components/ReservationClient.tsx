@@ -55,7 +55,7 @@ export default function ReservationClient() {
               />
             </div>
             <div className='flex items-end w-full '>
-              <Link className='w-full' to='/course/reservation'>
+              <Link className='w-full' to='/course/trajets'>
                 <Button type='submit' className='w-full'>
                   <div className=' flex gap-6 justify-between items-center'>
                     Rechercher

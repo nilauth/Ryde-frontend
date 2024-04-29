@@ -17,7 +17,8 @@ import RegisterPage from "@/common/registerPage";
 import AdminProfile from "@/admin/pages/adminProfilePage";
 import PaymentsPage from "@/admin/pages/paymentsPage";
 import AcceuilClient from "@/client/pages/acceuilClientPage";
-import ReservationClient from "@/client/pages/reservationClientPage";
+import ReservationClientPage from "@/client/pages/reservationClientPage";
+import ReservationDetailsPage from "@/client/pages/ReservationDetailsPage";
 
 const router = createBrowserRouter([
   {
@@ -30,8 +31,9 @@ const router = createBrowserRouter([
     element: <LoginPage />,
   },
   {
-    path: "/course/reservation",
-    element: <ReservationClient />,
+    path: "/course/trajets",
+    element: <ReservationClientPage />,
+    children: [{ path: ":reservationId", element: <ReservationDetailsPage /> }],
   },
   {
     path: "/register",
