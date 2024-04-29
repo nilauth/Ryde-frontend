@@ -16,16 +16,22 @@ import LoginPage from "@/common/loginPage";
 import RegisterPage from "@/common/registerPage";
 import AdminProfile from "@/admin/pages/adminProfilePage";
 import PaymentsPage from "@/admin/pages/paymentsPage";
+import AcceuilClient from "@/client/pages/acceuilClient";
+import ReservationClient from "@/client/pages/reservationClient";
 
 const router = createBrowserRouter([
   {
     path: "/",
     errorElement: <Error404Page />, // catch-all 404, due to error bubbling. Works for now, need to catch other types of errors tho
-    element: <h1>Hello world!</h1>,
+    element: <AcceuilClient />,
   },
   {
     path: "/login",
     element: <LoginPage />,
+  },
+  {
+    path: "/course/reservation",
+    element: <ReservationClient />,
   },
   {
     path: "/register",
