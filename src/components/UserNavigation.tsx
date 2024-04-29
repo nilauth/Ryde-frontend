@@ -3,8 +3,8 @@ import { UserNav } from "./UserNav";
 import { Button } from "./ui/button";
 import { useState } from "react";
 
-const UserNavigation = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+const UserNavigation = ({ isAuth }: { isAuth: boolean }) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(isAuth);
   return (
     <nav className='bg-white border flex'>
       <div className='flex flex-wrap justify-between items-center mx-auto container p-5'>

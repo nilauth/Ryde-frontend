@@ -36,7 +36,7 @@ function getRandomInt(min: number, max: number): number {
 }
 
 // Generate random trajets
-const numberOfTrajets = 10;
+const numberOfTrajets = 20;
 const trajets: Trajet[] = [];
 for (let i = 0; i < numberOfTrajets; i++) {
   const departureIndex = getRandomInt(0, moroccanCities.length);
