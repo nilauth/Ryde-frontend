@@ -1,9 +1,46 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import UserService from "@/services/userService";
+
+// type i added still needs to be verified
+
+type UserDataType = {
+  token: string;
+  role: string;
+  message: string;
+};
 
 export default function LoginPage() {
+  // shit i added from the other app
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      const userData: UserDataType = await UserService.login(email, password);
+      console.log(userData);
+      if (userData.token) {
+        localStorage.setItem("token", userData.token);
+        localStorage.setItem("role", userData.role);
+        navigate("/profile");
+      } else {
+        setError(userData.message);
+      }
+    } catch (error: unknown) {
+      console.log(error);
+      setError((error as Error).message);
+      setTimeout(() => {
+        setError("");
+      }, 5000);
+    }
+  };
   return (
     <div className='w-full h-screen lg:grid lg:grid-cols-2'>
       <div className='hidden bg-muted lg:block'>
@@ -16,8 +53,8 @@ export default function LoginPage() {
         />
       </div>
       <div className='flex items-center justify-center py-12'>
-        <div className='mx-auto grid w-[350px] gap-6'>
-          <div className='grid gap-2 text-center'>
+        <form className='mx-auto grid w-[350px] gap-6' onSubmit={handleSubmit}>
+          <div className='grid gap-2 text-center '>
             <h1 className='text-3xl font-bold'>Connexion</h1>
             <p className='text-balance text-muted-foreground'>
               Entrez votre e-mail ci-dessous pour vous connecter à votre compte
@@ -26,7 +63,14 @@ export default function LoginPage() {
           <div className='grid gap-4'>
             <div className='grid gap-2'>
               <Label htmlFor='email'>Email</Label>
-              <Input id='email' type='email' placeholder='m@example.com' required />
+              <Input
+                id='email'
+                type='email'
+                placeholder='m@example.com'
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
             <div className='grid gap-2'>
               <div className='flex items-center'>
@@ -35,11 +79,19 @@ export default function LoginPage() {
                   Mot de passe oublié ?
                 </Link>
               </div>
-              <Input id='password' type='password' placeholder='••••••••' required />
+              <Input
+                id='password'
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                type='password'
+                placeholder='••••••••'
+                required
+              />
             </div>
             <Button type='submit' className='w-full'>
               Connexion
             </Button>
+            {error && <p className='text-xs text-red-500'>{error}</p>}
           </div>
           <div className='mt-4 text-center text-sm'>
             Vous n'avez pas de compte ?{" "}
@@ -47,7 +99,7 @@ export default function LoginPage() {
               Inscrivez-vous
             </Link>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );

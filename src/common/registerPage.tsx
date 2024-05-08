@@ -1,9 +1,64 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Link } from "react-router-dom";
+import UserService from "@/services/userService";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 export default function RegisterPage() {
+  // shit i added from the other frontend
+
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    role: "",
+    city: "",
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement> | { target: { value: string; name: string } }) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(formData);
+    try {
+      // Call the register method from UserService
+
+      // const token = localStorage.getItem("token");
+      await UserService.register(formData);
+
+      const userData = await UserService.login(formData.email, formData.password);
+      console.log(userData);
+      if (userData.token) {
+        localStorage.setItem("token", userData.token);
+        localStorage.setItem("role", userData.role);
+        // Navigate to the user's profile page
+        navigate("/profile");
+      } else {
+        console.log(userData.message);
+      }
+
+      // Clear the form fields after successful registration
+      setFormData({
+        name: "",
+        email: "",
+        password: "",
+        role: "",
+        city: "",
+      });
+      alert("L'utilisateur a été enregistré avec succès.");
+      navigate("/profile");
+    } catch (error) {
+      console.error("Erreur lors de l'inscription de l'utilisateur :", error);
+      alert("Une erreur s'est produite lors de l'inscription de l'utilisateur");
+    }
+  };
   return (
     <div className='w-full h-screen lg:grid lg:grid-cols-2'>
       <div className='hidden bg-muted lg:block'>
@@ -16,38 +71,89 @@ export default function RegisterPage() {
         />
       </div>
       <div className='flex items-center justify-center py-12'>
-        <div className='mx-auto grid w-[350px] gap-6'>
+        <form className='mx-auto grid w-[350px] gap-6' onSubmit={handleSubmit}>
           <div className='grid gap-2 text-center'>
             <h1 className='text-3xl font-bold'>Inscription</h1>
             <p className=' text-muted-foreground '>Entrez vos informations ci-dessous pour créer un compte</p>
           </div>
           <div className='grid gap-4'>
             <div className='flex gap-5'>
-              <div className='grid gap-2 flex-1'>
-                <Label htmlFor='prenom'>Prénom</Label>
-                <Input id='prenom' type='text' placeholder='John' required />
-              </div>
-              <div className='grid gap-2'>
-                <Label htmlFor='nom'>Nom</Label>
-                <Input id='nom' type='text' placeholder='Doe' required />
+              <div className='grid gap-2 w-full'>
+                <Label htmlFor='nom'>Nom complet</Label>
+                {/* ehy nom doesnt work and name works */}
+                <Input
+                  id='name'
+                  name='name'
+                  type='text'
+                  placeholder='John Doe'
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  required
+                  className='w-full'
+                />
               </div>
             </div>
             <div className='grid gap-2'>
               <Label htmlFor='email'>E-mail</Label>
-              <Input id='email' type='email' placeholder='m@example.com' required />
+              <Input
+                type='email'
+                name='email'
+                value={formData.email}
+                onChange={handleInputChange}
+                id='email'
+                placeholder='m@example.com'
+                required
+              />
             </div>
             <div className='grid gap-2'>
               <div className='flex items-center'>
                 <Label htmlFor='password'>Mot de passe</Label>
               </div>
-              <Input id='password' type='password' placeholder='••••••••' required />
+              <Input
+                type='password'
+                name='password'
+                value={formData.password}
+                onChange={handleInputChange}
+                id='password'
+                placeholder='••••••••'
+                required
+              />
             </div>
             <div className='grid gap-2'>
               <div className='flex items-center'>
                 <Label htmlFor='password-confirmation'>Confirmer le mot de passe</Label>
               </div>
-              <Input id='password-confirmation' type='password' placeholder='••••••••' required />
+              <Input type='password' name='confirm-password' id='confirm-password' placeholder='••••••••' required />
             </div>
+            <div className='grid gap-2'>
+              <Label htmlFor='role'>Choisissez votre rôle</Label>
+              <Select
+                onValueChange={(role) => handleInputChange({ target: { value: role, name: "role" } })}
+                value={formData.role}
+                name='role'
+              >
+                <SelectTrigger className=''>
+                  <SelectValue placeholder='Rôle' />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value='USER'>Client</SelectItem>
+                  <SelectItem value='CONDUCTEUR'>Conducteur</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className='grid gap-2'>
+              <Label htmlFor='ville'>Ville</Label>
+              <Input
+                type='text'
+                name='city'
+                value={formData.city}
+                onChange={handleInputChange}
+                id='city'
+                placeholder='Fes'
+                required
+              />
+            </div>
+
             <Button type='submit' className='w-full'>
               Créer un compte
             </Button>
@@ -58,7 +164,7 @@ export default function RegisterPage() {
               Connectez-vous
             </Link>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
