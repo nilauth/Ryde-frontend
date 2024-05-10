@@ -20,6 +20,7 @@ import AcceuilClient from "@/client/pages/acceuilClientPage";
 import ReservationClientPage from "@/client/pages/reservationClientPage";
 
 import TrajetDetailsPage from "./client/pages/trajetDetailsPage";
+import RechercheTrajetClientPage from "./client/pages/rechercheTrajetClientPage";
 
 const router = createBrowserRouter([
   {
@@ -32,13 +33,23 @@ const router = createBrowserRouter([
     element: <LoginPage />,
   },
   {
+    path: "/register",
+    element: <RegisterPage />,
+  },
+
+  // course routes
+  {
+    path: "/course/recherche-trajet",
+    element: <RechercheTrajetClientPage />,
+  },
+  {
     path: "/course/trajets",
     element: <ReservationClientPage />,
     children: [{ path: ":trajetId", element: <TrajetDetailsPage /> }],
   },
   {
-    path: "/register",
-    element: <RegisterPage />,
+    path: "/course/reservations",
+    element: <ReservationClientPage />,
   },
 
   // admin routes

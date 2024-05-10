@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
-export default function DatePicker() {
+export default function DatePicker({ className }: { className?: string }) {
   const [date, setDate] = React.useState<Date>();
 
   return (
@@ -17,9 +17,9 @@ export default function DatePicker() {
       <PopoverTrigger asChild>
         <Button
           variant={"outline"}
-          className={cn("w-[180px] justify-start text-left font-normal", !date && "text-muted-foreground")}
+          className={cn("justify-start text-left font-normal", !date && "text-muted-foreground", className)}
         >
-          <CalendarIcon className='mr-2 h-4 w-4' />
+          <CalendarIcon className='h-5 w-5 text-gray-400' />
           {date ? format(date, "PPP", { locale: fr }) : <span>Choisissez une date</span>}
         </Button>
       </PopoverTrigger>
