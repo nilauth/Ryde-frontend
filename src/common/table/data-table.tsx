@@ -16,9 +16,10 @@ import { Input } from "@/components/ui/input";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  filerBy: string;
 }
 
-export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) {
+export function DataTable<TData, TValue>({ columns, data, filerBy }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
 
   const table = useReactTable({
@@ -37,9 +38,9 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
     <div>
       <div className='flex items-center py-4'>
         <Input
-          placeholder='Filtrer par CIN...'
-          value={(table.getColumn("cin")?.getFilterValue() as string) ?? ""}
-          onChange={(event) => table.getColumn("cin")?.setFilterValue(event.target.value)}
+          placeholder={`Filtrer par ${filerBy}...`}
+          value={(table.getColumn(filerBy)?.getFilterValue() as string) ?? ""}
+          onChange={(event) => table.getColumn(filerBy)?.setFilterValue(event.target.value)}
           className='max-w-sm'
         />
       </div>

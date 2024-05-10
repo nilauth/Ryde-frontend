@@ -19,7 +19,7 @@ const clients: Client[] = [
 const ClientsList = () => {
   return (
     <div>
-      <DataTable columns={clientColumns} data={clients} />
+      <DataTable columns={clientColumns} data={clients} filerBy='cin' />
     </div>
   );
 };

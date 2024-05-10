@@ -22,7 +22,7 @@ const conducteurs: Conducteur[] = [
 const DriversList = () => {
   return (
     <div>
-      <DataTable columns={ConducteurColumns} data={conducteurs} />
+      <DataTable columns={ConducteurColumns} data={conducteurs} filerBy='cin' />
     </div>
   );
 };
