@@ -1,61 +1,81 @@
 import { Button } from "@/components/ui/button";
 import UserService from "@/services/userService";
-import { useState } from "react"; // Import useState for state management
+import { useEffect, useState } from "react";
 
 export default function Component() {
+  const [currentUser, setCurrentUser] = useState(null); // Initialize currentUser with null
   const [formData, setFormData] = useState({
-    // id: "1",
-    // date: "",
-    // driverId: "",
-    // placeDispo: "",
-    // placeInitiale: "4",
-    // prix: "",
-    // status: true,
-    // villeDepartId: "",
-    // villeArrivId: "",
-    // heureArriv: "",
-    // heureDepart: "",
     id: 1,
-    driverId: 123,
-    villeDepartId: 456,
-    villeArrivId: 789,
-    heureDepart: "2024-05-12T08:00:00Z",
-    date: "2024-05-12",
-    heureArriv: "2024-05-12T10:00:00Z",
+    driverId: null, // Initialize driverId with null
+    villeDepart: "",
+    villeArriv: "",
+    heureDepart: "",
+    date: "",
+    heureArriv: "",
     prix: 50.0,
     placeDispo: 3,
     placeInitiale: 5,
     status: true,
   });
 
-  const hardOffre = {
-    id: 1,
-    driverId: 1,
-    villeDepart: 1,
-    villeArriv: 2,
-    heureDepart: "2024-05-12T08:00:00Z",
-    date: "2024-05-12",
-    heureArriv: "2024-05-12T10:00:00Z",
-    prix: 50.0,
-    placeDispo: 3,
-    placeInitiale: 5,
-    status: true,
+  function convertTimeToISO(timeString: string) {
+    // Split the time string into hours and minutes
+    const [hours, minutes] = timeString.split(":");
+
+    // Create a new Date object with today's date and the specified time
+    const date = new Date();
+    date.setHours(parseInt(hours, 10));
+    date.setMinutes(parseInt(minutes, 10));
+
+    // Return the ISO string representation of the date
+    return date.toISOString();
+  }
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const user = await UserService.getCurrentUser();
+        setCurrentUser(user);
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          driverId: user?.id || null, // Update driverId based on currentUser
+        }));
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      // Await for UserService.ajouterOffre to complete
+      await UserService.ajouterOffre(
+        {
+          ...formData,
+          heureDepart: convertTimeToISO(formData.heureDepart),
+          heureArriv: convertTimeToISO(formData.heureArriv),
+        },
+        localStorage.getItem("token") || ""
+      );
+      // Log the user
+      console.log(await myFunction());
+    } catch (error) {
+      console.error("Error adding ride:", error);
+    }
   };
 
-  async function myFunction() {
+  const myFunction = async () => {
     try {
       const user = await UserService.getCurrentUser();
       console.log(user);
+      return user;
     } catch (error) {
       console.error("Error:", error);
+      throw error; // Rethrow error to be caught by the caller
     }
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // console.log(localStorage.getItem("token"));
-    UserService.ajouterOffre(hardOffre, localStorage.getItem("token")!);
-    console.log(myFunction());
   };
 
   const handleChange = (e) => {
@@ -72,16 +92,16 @@ export default function Component() {
         <h1 className='text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100'>Add New Ride</h1>
         <form className='space-y-4' onSubmit={handleSubmit}>
           <div>
-            <label className='block text-sm font-medium text-gray-700 dark:text-gray-300' htmlFor='villeArrivId'>
-              villeArrivId
+            <label className='block text-sm font-medium text-gray-700 dark:text-gray-300' htmlFor='villeArriv'>
+              villeArriv
             </label>
             <input
               className='w-full p-2 border'
-              id='villeArrivId'
-              name='villeArrivId'
+              id='villeArriv'
+              name='villeArriv'
               placeholder='Enter pickup location'
               type='text'
-              value={formData.villeArrivId}
+              value={formData.villeArriv}
               onChange={handleChange}
               required
             />
@@ -92,11 +112,11 @@ export default function Component() {
             </label>
             <input
               className='w-full p-2 border'
-              id='villeDepartId'
-              name='villeDepartId'
+              id='villeDepart'
+              name='villeDepart'
               placeholder='Enter drop-off location'
               type='text'
-              value={formData.villeDepartId}
+              value={formData.villeDepart}
               onChange={handleChange}
               required
             />
@@ -107,7 +127,7 @@ export default function Component() {
             </label>
             <input type='date' id='date' name='date' value={formData.date} onChange={handleChange} required />
           </div>
-          <div>
+          {/* <div>
             <label className='block text-sm font-medium text-gray-700 dark:text-gray-300' htmlFor='driverId'>
               Driver id
             </label>
@@ -117,9 +137,9 @@ export default function Component() {
               name='driverId'
               value={formData.driverId}
               onChange={handleChange}
-              required
+              defaultValue={currentUser?.id}
             />
-          </div>
+          </div> */}
           <div>
             <label className='block text-sm font-medium text-gray-700 dark:text-gray-300' htmlFor='heureArriv'>
               heureArriv
