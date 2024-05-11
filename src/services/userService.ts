@@ -9,6 +9,7 @@ type UserDataType = {
 
 interface FormDataType {
   name: string;
+  cin:string
   email: string;
   password: string;
   role: string;

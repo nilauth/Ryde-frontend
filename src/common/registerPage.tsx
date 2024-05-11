@@ -13,6 +13,7 @@ export default function RegisterPage() {
 
   const [formData, setFormData] = useState({
     name: "",
+    cin:"",
     email: "",
     password: "",
     role: "",
@@ -47,6 +48,7 @@ export default function RegisterPage() {
       // Clear the form fields after successful registration
       setFormData({
         name: "",
+        cin:"",
         email: "",
         password: "",
         role: "",
@@ -82,27 +84,43 @@ export default function RegisterPage() {
                 <Label htmlFor='nom'>Nom complet</Label>
                 {/* ehy nom doesnt work and name works */}
                 <Input
-                  id='name'
-                  name='name'
-                  type='text'
-                  placeholder='John Doe'
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  required
-                  className='w-full'
+                    id='name'
+                    name='name'
+                    type='text'
+                    placeholder='John Doe'
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    required
+                    className='w-full'
+                />
+              </div>
+            </div>
+            <div className='flex gap-5'>
+              <div className='grid gap-2 w-full'>
+                <Label htmlFor='cin'>CIN: </Label>
+                {/* ehy nom doesnt work and name works */}
+                <Input
+                    id='cin'
+                    name='cin'
+                    type='text'
+                    placeholder='John Doe'
+                    value={formData.cin}
+                    onChange={handleInputChange}
+                    required
+                    className='w-full'
                 />
               </div>
             </div>
             <div className='grid gap-2'>
               <Label htmlFor='email'>E-mail</Label>
               <Input
-                type='email'
-                name='email'
-                value={formData.email}
-                onChange={handleInputChange}
-                id='email'
-                placeholder='m@example.com'
-                required
+                  type='email'
+                  name='email'
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  id='email'
+                  placeholder='m@example.com'
+                  required
               />
             </div>
             <div className='grid gap-2'>
@@ -110,30 +128,30 @@ export default function RegisterPage() {
                 <Label htmlFor='password'>Mot de passe</Label>
               </div>
               <Input
-                type='password'
-                name='password'
-                value={formData.password}
-                onChange={handleInputChange}
-                id='password'
-                placeholder='••••••••'
-                required
+                  type='password'
+                  name='password'
+                  value={formData.password}
+                  onChange={handleInputChange}
+                  id='password'
+                  placeholder='••••••••'
+                  required
               />
             </div>
             <div className='grid gap-2'>
               <div className='flex items-center'>
                 <Label htmlFor='password-confirmation'>Confirmer le mot de passe</Label>
               </div>
-              <Input type='password' name='confirm-password' id='confirm-password' placeholder='••••••••' required />
+              <Input type='password' name='confirm-password' id='confirm-password' placeholder='••••••••' required/>
             </div>
             <div className='grid gap-2'>
               <Label htmlFor='role'>Choisissez votre rôle</Label>
               <Select
-                onValueChange={(role) => handleInputChange({ target: { value: role, name: "role" } })}
-                value={formData.role}
-                name='role'
+                  onValueChange={(role) => handleInputChange({target: {value: role, name: "role"}})}
+                  value={formData.role}
+                  name='role'
               >
                 <SelectTrigger className=''>
-                  <SelectValue placeholder='Rôle' />
+                  <SelectValue placeholder='Rôle'/>
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value='USER'>Client</SelectItem>
@@ -145,13 +163,13 @@ export default function RegisterPage() {
             <div className='grid gap-2'>
               <Label htmlFor='ville'>Ville</Label>
               <Input
-                type='text'
-                name='city'
-                value={formData.city}
-                onChange={handleInputChange}
-                id='city'
-                placeholder='Fes'
-                required
+                  type='text'
+                  name='city'
+                  value={formData.city}
+                  onChange={handleInputChange}
+                  id='city'
+                  placeholder='Fes'
+                  required
               />
             </div>
 
