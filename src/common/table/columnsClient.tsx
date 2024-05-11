@@ -15,12 +15,12 @@ export const columns: ColumnDef<Client>[] = [
     accessorKey: "id",
     header: "ID",
   },
+  // {
+  //   accessorKey: "cin",
+  //   header: "CIN",
+  // },
   {
-    accessorKey: "cin",
-    header: "CIN",
-  },
-  {
-    accessorKey: "nomComplet",
+    accessorKey: "name",
     header: "Nom complet",
   },
   {

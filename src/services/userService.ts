@@ -15,6 +15,20 @@ interface FormDataType {
   city: string;
 }
 
+type OffreDataType = {
+  id: string;
+  date: string;
+  driverId: string;
+  placeDispo: string;
+  placeInitiale: string;
+  prix: string;
+  status: boolean;
+  villeDepartId: string;
+  villeArrivId: string;
+  heureArriv: string;
+  heureDepart: string;
+};
+
 class UserService {
   static BASE_URL = "http://localhost:8081";
 
@@ -32,6 +46,19 @@ class UserService {
     try {
       const response = await axios.post(`${UserService.BASE_URL}/auth/register`, userData, {
         // headers: { Authorization: `Bearer ${token}` },
+      });
+      return response.data;
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+  }
+
+  static async ajouterOffre(offreData: any, token: string) {
+    try {
+      console.log(offreData, token);
+      const response = await axios.post(`${UserService.BASE_URL}/driver/offers/add`, offreData, {
+        headers: { Authorization: `Bearer ${token}` },
       });
       return response.data;
     } catch (err) {
@@ -96,6 +123,19 @@ class UserService {
   }
 
   /**AUTHENTICATION CHECKER */
+
+  static async getCurrentUser() {
+    const token = localStorage.getItem("token");
+    try {
+      const response = await axios.get(`${UserService.BASE_URL}/user/current-user`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      return response.data;
+    } catch (err) {
+      throw err;
+    }
+  }
+
   static logout() {
     localStorage.removeItem("token");
     localStorage.removeItem("role");

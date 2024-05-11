@@ -21,6 +21,7 @@ import ReservationClientPage from "@/client/pages/reservationClientPage";
 
 import TrajetDetailsPage from "./client/pages/trajetDetailsPage";
 import RechercheTrajetClientPage from "./client/pages/rechercheTrajetClientPage";
+import AjouterTrajetPage from "./conducteur/ajouterTrajetPage";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
   },
 
   // course routes
+  {
+    path: "/course/ajouter-trajet",
+    element: <AjouterTrajetPage />,
+  },
   {
     path: "/course/recherche-trajet",
     element: <RechercheTrajetClientPage />,

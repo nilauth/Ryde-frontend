@@ -53,7 +53,7 @@ export default function RegisterPage() {
         city: "",
       });
       alert("L'utilisateur a été enregistré avec succès.");
-      navigate("/profile");
+      navigate("/admin/dashboard");
     } catch (error) {
       console.error("Erreur lors de l'inscription de l'utilisateur :", error);
       alert("Une erreur s'est produite lors de l'inscription de l'utilisateur");
@@ -138,6 +138,7 @@ export default function RegisterPage() {
                 <SelectContent>
                   <SelectItem value='USER'>Client</SelectItem>
                   <SelectItem value='CONDUCTEUR'>Conducteur</SelectItem>
+                  <SelectItem value='ADMIN'>Admin</SelectItem>
                 </SelectContent>
               </Select>
             </div>
