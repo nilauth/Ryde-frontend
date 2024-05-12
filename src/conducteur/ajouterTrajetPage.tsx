@@ -1,11 +1,12 @@
 import { Button } from "@/components/ui/button";
 import UserService from "@/services/userService";
 import { useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 export default function Component() {
-  const [currentUser, setCurrentUser] = useState(null); // Initialize currentUser with null
+  const [currentUser, setCurrentUser] = useState(null);
   const [formData, setFormData] = useState({
-    id: 1,
+    id: "",
     driverId: null, // Initialize driverId with null
     villeDepart: "",
     villeArriv: "",
@@ -55,8 +56,9 @@ export default function Component() {
       await UserService.ajouterOffre(
         {
           ...formData,
-          heureDepart: convertTimeToISO(formData.heureDepart),
-          heureArriv: convertTimeToISO(formData.heureArriv),
+          // heureDepart: convertTimeToISO(formData.heureDepart),
+          // heureArriv: convertTimeToISO(formData.heureArriv),
+          id: uuidv4(),
         },
         localStorage.getItem("token") || ""
       );
