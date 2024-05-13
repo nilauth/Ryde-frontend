@@ -1,9 +1,40 @@
-import { PopoverTrigger, PopoverContent, Popover } from "@/components/ui/popover";
-import { Calendar } from "@/components/ui/calendar";
-import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import axios from "axios";
 import DatePicker from "@/components/DatePicker";
+import { Button } from "@/components/ui/button";
+import UserService from "@/services/userService";
 
 export default function Component() {
+  const [formData, setFormData] = useState({
+    villeDep: "",
+    villeArrv: "",
+    date: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      console.log(localStorage.getItem("token"));
+      console.log(formData);
+      const response = await axios.post(`${UserService.BASE_URL}/user/offersFiltre`, formData, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token") || ""}` },
+      });
+      console.log(response.data);
+      // Handle response or update UI accordingly
+    } catch (err) {
+      console.error("Error:", err);
+      // Handle error or display error message
+    }
+  };
+
   return (
     <main key='1' className='w-full max-w-5xl mx-auto px-4 sm:px-6 py-12 md:py-16 lg:py-20'>
       <div className='grid gap-16 justify-center'>
@@ -13,52 +44,44 @@ export default function Component() {
             Recherchez des trajets dans votre région et réservez votre voyage en toute simplicité.
           </p>
         </div>
-        <form className='grid gap-6 bg-gray-100 dark:bg-gray-800 p-6 rounded-lg max-w-2xl'>
+
+        {/* form starts here */}
+        <form className='grid gap-6 bg-gray-100 dark:bg-gray-800 p-6 rounded-lg max-w-2xl' onSubmit={handleSubmit}>
           <div className='grid sm:grid-cols-2 gap-4'>
             <div className='space-y-2'>
-              <label className='text-sm font-medium' htmlFor='departure'>
+              <label className='text-sm font-medium' htmlFor='villeDep'>
                 Ville de départ
               </label>
               <input
                 className='w-full rounded-md border border-gray-300 dark:border-gray-600 px-3 py-2 text-sm focus:border-primary focus:ring-primary dark:bg-gray-950 dark:text-gray-50'
-                id='departure'
+                id='villeDep'
+                name='villeDep'
+                value={formData.villeDep}
+                onChange={handleChange}
                 placeholder='Entrez la ville de départ'
                 type='text'
               />
             </div>
             <div className='space-y-2'>
-              <label className='text-sm font-medium' htmlFor='arrival'>
+              <label className='text-sm font-medium' htmlFor='villeArrv'>
                 Ville d'arrivée
               </label>
               <input
                 className='w-full rounded-md border border-gray-300 dark:border-gray-600 px-3 py-2 text-sm focus:border-primary focus:ring-primary dark:bg-gray-950 dark:text-gray-50'
-                id='arrival'
+                id='villeArrv'
+                name='villeArrv'
+                value={formData.villeArrv}
+                onChange={handleChange}
                 placeholder="Entrez la ville d'arrivée"
                 type='text'
               />
             </div>
           </div>
-          <div className='space-y-2'>
-            <label className='text-sm font-medium' htmlFor='date'>
+          <div>
+            <label className='block text-sm font-medium text-gray-700 dark:text-gray-300' htmlFor='date'>
               Date
             </label>
-            <DatePicker className='w-full flex justify-center items-center gap-6' />
-            {/* <Popover>
-              <PopoverTrigger asChild>
-                <button
-                  className='w-full rounded-md border border-gray-300 dark:border-gray-600 px-3 py-2 text-sm font-medium text-left focus:border-primary focus:ring-primary dark:bg-gray-950 dark:text-gray-50'
-                  type='button'
-                >
-                  <div className='flex items-center justify-between'>
-                    <span>Sélectionnez une date</span>
-                    <CalendarIcon className='h-5 w-5 text-gray-400' />
-                  </div>
-                </button>
-              </PopoverTrigger>
-              <PopoverContent className='p-0'>
-                <Calendar />
-              </PopoverContent>
-            </Popover> */}
+            <input type='date' id='date' name='date' value={formData.date} onChange={handleChange} required />
           </div>
           <Button className='w-full' type='submit'>
             Rechercher
@@ -66,27 +89,5 @@ export default function Component() {
         </form>
       </div>
     </main>
-  );
-}
-
-function CalendarIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns='http://www.w3.org/2000/svg'
-      width='24'
-      height='24'
-      viewBox='0 0 24 24'
-      fill='none'
-      stroke='currentColor'
-      strokeWidth='2'
-      strokeLinecap='round'
-      strokeLinejoin='round'
-    >
-      <path d='M8 2v4' />
-      <path d='M16 2v4' />
-      <rect width='18' height='18' x='3' y='4' rx='2' />
-      <path d='M3 10h18' />
-    </svg>
   );
 }

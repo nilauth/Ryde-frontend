@@ -163,11 +163,35 @@ class UserService {
     }
   }
 
+  // admin only
   static async getAllOffres(token: string) {
     try {
       const response = await axios.get(`${UserService.BASE_URL}/user/offers`, {
         headers: { Authorization: `Bearer ${token}` },
       });
+      return response.data;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  // client only
+  static async getAllOffresFiltered(
+    { villeDepart, villeArriv, date }: { villeDepart: string; villeArriv: string; date: string },
+    token: string
+  ) {
+    try {
+      const response = await axios.post(
+        `${UserService.BASE_URL}/user/offersFiltre`,
+        {
+          villeDep: villeDepart,
+          villeArrv: villeArriv,
+          date: date,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       return response.data;
     } catch (err) {
       throw err;
