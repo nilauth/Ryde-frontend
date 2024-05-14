@@ -13,7 +13,7 @@ const UserNavigation = ({ isAuth }: { isAuth: boolean }) => {
           <span className='text-2xl'>Ryde</span>
         </Link>
 
-        <div className='items-center justify-between font-medium flex  bg-red-50'>
+        <div className='items-center justify-between font-medium flex'>
           {isLoggedIn ? (
             <UserNav />
           ) : (

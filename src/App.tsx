@@ -22,6 +22,7 @@ import ReservationClientPage from "@/client/pages/reservationClientPage";
 import TrajetDetailsPage from "./client/pages/trajetDetailsPage";
 import RechercheTrajetClientPage from "./client/pages/rechercheTrajetClientPage";
 import AjouterTrajetPage from "./conducteur/ajouterTrajetPage";
+import TestPage from "./client/pages/testPage";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <LoginPage />,
+  },
+  {
+    path: "/test",
+    element: <TestPage />,
   },
   {
     path: "/register",
@@ -76,8 +81,6 @@ const router = createBrowserRouter([
     ],
   },
   // driver routes
-
-  
 ]);
 
 function App() {

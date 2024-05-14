@@ -16,7 +16,7 @@ const ReservationClient = () => {
   ));
 
   return (
-    <main className='h-[calc(100vh-74px)]'>
+    <section className='h-[calc(100vh-74px)]'>
       <UserNavigation isAuth={true} />
       <div className='grid grid-cols-2 container'>
         <div className='flex flex-col justify-center items-center w-fit '>
@@ -26,7 +26,7 @@ const ReservationClient = () => {
           <TrajetDetailsPage />
         </div>
       </div>
-    </main>
+    </section>
   );
 };
 
