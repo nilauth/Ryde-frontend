@@ -6,8 +6,8 @@ import UserService from "@/services/userService";
 
 export default function Component() {
   const [formData, setFormData] = useState({
-    villeDep: "",
-    villeArrv: "",
+    villeDepart: "",
+    villeArriv: "",
     date: "",
   });
 
@@ -49,28 +49,28 @@ export default function Component() {
         <form className='grid gap-6 bg-gray-100 dark:bg-gray-800 p-6 rounded-lg max-w-2xl' onSubmit={handleSubmit}>
           <div className='grid sm:grid-cols-2 gap-4'>
             <div className='space-y-2'>
-              <label className='text-sm font-medium' htmlFor='villeDep'>
+              <label className='text-sm font-medium' htmlFor='villeDepart'>
                 Ville de départ
               </label>
               <input
                 className='w-full rounded-md border border-gray-300 dark:border-gray-600 px-3 py-2 text-sm focus:border-primary focus:ring-primary dark:bg-gray-950 dark:text-gray-50'
-                id='villeDep'
-                name='villeDep'
-                value={formData.villeDep}
+                id='villeDepart'
+                name='villeDepart'
+                value={formData.villeDepart}
                 onChange={handleChange}
                 placeholder='Entrez la ville de départ'
                 type='text'
               />
             </div>
             <div className='space-y-2'>
-              <label className='text-sm font-medium' htmlFor='villeArrv'>
+              <label className='text-sm font-medium' htmlFor='villeArriv'>
                 Ville d'arrivée
               </label>
               <input
                 className='w-full rounded-md border border-gray-300 dark:border-gray-600 px-3 py-2 text-sm focus:border-primary focus:ring-primary dark:bg-gray-950 dark:text-gray-50'
-                id='villeArrv'
-                name='villeArrv'
-                value={formData.villeArrv}
+                id='villeArriv'
+                name='villeArriv'
+                value={formData.villeArriv}
                 onChange={handleChange}
                 placeholder="Entrez la ville d'arrivée"
                 type='text'
