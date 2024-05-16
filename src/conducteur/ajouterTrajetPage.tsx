@@ -91,26 +91,11 @@ export default function Component() {
   return (
     <div className='flex justify-center items-center h-screen bg-gray-100 dark:bg-gray-900'>
       <div className='bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8 w-full max-w-md'>
-        <h1 className='text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100'>Add New Ride</h1>
+        <h1 className='text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100'>Créer un nouveau offre</h1>
         <form className='space-y-4' onSubmit={handleSubmit}>
           <div>
-            <label className='block text-sm font-medium text-gray-700 dark:text-gray-300' htmlFor='villeArriv'>
-              villeArriv
-            </label>
-            <input
-              className='w-full p-2 border'
-              id='villeArriv'
-              name='villeArriv'
-              placeholder='Enter pickup location'
-              type='text'
-              value={formData.villeArriv}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div>
             <label className='block text-sm font-medium text-gray-700 dark:text-gray-300' htmlFor='to'>
-              villeDepartId
+              Ville de départ
             </label>
             <input
               className='w-full p-2 border'
@@ -119,6 +104,21 @@ export default function Component() {
               placeholder='Enter drop-off location'
               type='text'
               value={formData.villeDepart}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <label className='block text-sm font-medium text-gray-700 dark:text-gray-300' htmlFor='villeArriv'>
+              Ville d'arrivée
+            </label>
+            <input
+              className='w-full p-2 border'
+              id='villeArriv'
+              name='villeArriv'
+              placeholder='Enter pickup location'
+              type='text'
+              value={formData.villeArriv}
               onChange={handleChange}
               required
             />
@@ -142,28 +142,29 @@ export default function Component() {
               defaultValue={currentUser?.id}
             />
           </div> */}
-          <div>
-            <label className='block text-sm font-medium text-gray-700 dark:text-gray-300' htmlFor='heureArriv'>
-              heureArriv
-            </label>
-            <input
-              name='heureArriv'
-              id='heureArriv'
-              type='time'
-              value={formData.heureArriv}
-              onChange={handleChange}
-              required
-            />
-          </div>
+
           <div>
             <label className='block text-sm font-medium text-gray-700 dark:text-gray-300' htmlFor='heureDepart'>
-              heureDepart
+              Heure de départ
             </label>
             <input
               name='heureDepart'
               id='heureDepart'
               type='time'
               value={formData.heureDepart}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <label className='block text-sm font-medium text-gray-700 dark:text-gray-300' htmlFor='heureArriv'>
+              Heure d'arrivée
+            </label>
+            <input
+              name='heureArriv'
+              id='heureArriv'
+              type='time'
+              value={formData.heureArriv}
               onChange={handleChange}
               required
             />
@@ -200,7 +201,7 @@ export default function Component() {
             />
           </div>
           <Button className='w-full' type='submit'>
-            Add Ride
+            Ajouter offre
           </Button>
         </form>
       </div>
