@@ -23,7 +23,7 @@ interface FormDataType {
 //   placeDispo: string;
 //   placeInitiale: string;
 //   prix: string;
-//   status: boolean;
+//   status: boolean; 
 //   villeDepartId: string;
 //   villeArrivId: string;
 //   heureArriv: string;
@@ -174,6 +174,8 @@ class UserService {
       throw err;
     }
   }
+
+
 
   // client only
   static async getAllOffresFiltered(
