@@ -1,4 +1,3 @@
-import UserNavigation from "@/components/UserNavigation";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import UserService from "@/services/userService";
@@ -6,7 +5,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import ReservationCard from "../components/ReservationCard1";
 
-export default function Component() {
+export default function ClientRechercheOffresPage() {
   const [formData, setFormData] = useState({
     villeDepart: "",
     villeArriv: "",
@@ -76,15 +75,15 @@ export default function Component() {
 
   return (
     <>
-      <UserNavigation isAuth={true} />
-      <main className='w-full mx-auto px-4 sm:px-6 lg:grid lg:grid-cols-2 pt-6 container'>
-        <div className='flex flex-col gap-16 w-full grid-cols-1'>
-          <div className='text-center space-y-2'>
+      {/* <UserNavigation isAuth={true} /> */}
+      <main className='w-full mx-auto px-4 sm:px-6 lg:grid lg:grid-cols-2 container'>
+        <div className='flex flex-col gap-16 w-full grid-cols-1 pt-8'>
+          {/* <div className='text-center space-y-2'>
             <h1 className='text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl'>Trouvez votre prochain trajet</h1>
             <p className='text-gray-500 dark:text-gray-400 max-w-md mx-auto'>
               Recherchez des trajets dans votre région et réservez votre voyage en toute simplicité.
             </p>
-          </div>
+          </div> */}
 
           <form className='grid gap-6 bg-gray-100 dark:bg-gray-800 p-6 rounded-lg max-w-2xl' onSubmit={handleSubmit}>
             <div className='grid sm:grid-cols-2 gap-4'>
@@ -137,7 +136,7 @@ export default function Component() {
           </form>
         </div>
         <div className='flex flex-col justify-center items-center w-full'>
-          <ScrollArea className='h-[calc(100vh-74px)] pr-10'>
+          <ScrollArea className='h-[calc(100vh-74px)] pr-10 pt-8'>
             {searchDone ? (
               offers.length > 0 ? (
                 offers.map((offer) => (
