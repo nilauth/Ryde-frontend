@@ -67,6 +67,7 @@ export default function Component() {
           headers: { Authorization: `Bearer ${localStorage.getItem("token") || ""}` },
         }
       );
+      console.log(currentUser);
       console.log(response);
     } catch (err) {
       console.error("Error:", err);
