@@ -240,8 +240,6 @@ class UserService {
 
   static async getAllOffresClient(userId: number, token: string) {
     try {
-      console.log(token);
-      console.log(userId);
       const response = await axios.get(
         `${UserService.BASE_URL}/user/getAll-reservation-client/${userId}`,
 
