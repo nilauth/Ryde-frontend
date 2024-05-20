@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+  import { Button } from "@/components/ui/button";
 import UserService from "@/services/userService";
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
@@ -14,9 +14,10 @@ export default function Component() {
     date: "",
     heureArriv: "",
     prix: 50.0,
-    placeDispo: 3,
-    placeInitiale: 5,
-    status: true,
+    placeDispo:"",
+    placeInitiale:"",
+    statusOffres: true,
+    statusVoyages: true,
   });
 
   function convertTimeToISO(timeString: string) {
@@ -56,6 +57,7 @@ export default function Component() {
       await UserService.ajouterOffre(
         {
           ...formData,
+          placeInitiale:formData.placeDispo,
           // heureDepart: convertTimeToISO(formData.heureDepart),
           // heureArriv: convertTimeToISO(formData.heureArriv),
           id: uuidv4(),
