@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { CarIcon, KeySquare } from "lucide-react";
 
 function formatDate(inputDate) {
@@ -23,8 +24,15 @@ const ReservationCard = ({
   heureArriv,
   handleSubmit,
 }) => {
+  const [placeReserv, setPlaceReserv] = useState(1);
+
+  const onFormSubmit = (e) => {
+    e.preventDefault();
+    handleSubmit(e, placeReserv);
+  };
+
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={onFormSubmit}>
       <div className="w-full pb-10">
         <div className="max-w-full bg-white flex flex-col rounded-lg overflow-hidden shadow-lg border">
           <div className="flex flex-row items-center flex-nowrap bg-gray-100 p-2">
@@ -79,7 +87,12 @@ const ReservationCard = ({
                 <p className="font-bold">MAD {prix + 200}</p>
                 <p className="text-xs text-gray-500">Remboursable</p>
                 <p>place dispo {placeDispo}</p>
-                <input type="number" />
+                <input
+                  type="number"
+                  name="placeReserv"
+                  value={placeReserv}
+                  onChange={(e) => setPlaceReserv(e.target.value)}
+                />
               </div>
               <button className="w-32 h-11 rounded flex border-solid border text-white bg-green-800 mx-2 justify-center place-items-center">
                 <div className="">Reserver</div>

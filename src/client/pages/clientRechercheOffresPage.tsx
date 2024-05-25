@@ -61,13 +61,13 @@ export default function ClientRechercheOffresPage() {
     }
   };
 
-  const handleCardSubmit = async (e, client_id, offre_id) => {
+  const handleCardSubmit = async (e, placeReserv, client_id, offre_id) => {
     e.preventDefault();
-    console.log(client_id, offre_id);
+    console.log(client_id, offre_id, placeReserv);
     try {
       const response = await axios.post(
         `${UserService.BASE_URL}/user/add-reservation`,
-        { offreid: offre_id, userid: client_id },
+        { offreid: offre_id, userid: client_id, placeReserv },
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token") || ""}`,
@@ -159,9 +159,14 @@ export default function ClientRechercheOffresPage() {
                         villeArrv={offer.villeArriv}
                         heureDepart={offer.heureDepart}
                         heureArriv={offer.heureArriv}
-                        placeDispo={4}
-                        handleSubmit={(e) =>
-                          handleCardSubmit(e, currentUser?.id, offer.id)
+                        placeDispo={offer.placeDispo}
+                        handleSubmit={(e, placeReserv) =>
+                          handleCardSubmit(
+                            e,
+                            placeReserv,
+                            currentUser?.id,
+                            offer.id
+                          )
                         }
                       />
                     ))
