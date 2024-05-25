@@ -87,12 +87,19 @@ const ReservationCard = ({
                 <p className="font-bold">MAD {prix + 200}</p>
                 <p className="text-xs text-gray-500">Remboursable</p>
                 <p>place dispo {placeDispo}</p>
-                <input
-                  type="number"
+                <select
                   name="placeReserv"
                   value={placeReserv}
-                  onChange={(e) => setPlaceReserv(e.target.value)}
-                />
+                  onChange={(e) => setPlaceReserv(parseInt(e.target.value, 10))}
+                >
+                  {Array.from({ length: placeDispo }, (_, i) => i + 1).map(
+                    (num) => (
+                      <option key={num} value={num}>
+                        {num}
+                      </option>
+                    )
+                  )}
+                </select>
               </div>
               <button className="w-32 h-11 rounded flex border-solid border text-white bg-green-800 mx-2 justify-center place-items-center">
                 <div className="">Reserver</div>
