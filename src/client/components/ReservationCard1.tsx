@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CarIcon, KeySquare } from "lucide-react";
 
 function formatDate(inputDate) {
@@ -19,26 +19,43 @@ const ReservationCard = ({
   placeDispo,
   prix,
   villeDepart,
-  villeArrv,
+  villeArriv,
   heureDepart,
   heureArriv,
   handleSubmit,
 }) => {
   const [placeReserv, setPlaceReserv] = useState(1);
+  const [totalPrice, setTotalPrice] = useState(prix);
+
+  useEffect(() => {
+    setTotalPrice(prix * placeReserv);
+  }, [placeReserv, prix]);
 
   const onFormSubmit = (e) => {
     e.preventDefault();
-    handleSubmit(e, placeReserv);
+    console.log("total price: ", totalPrice);
+    console.log(villeArriv);
+    handleSubmit(e, placeReserv, totalPrice);
   };
 
   return (
     <form onSubmit={onFormSubmit}>
       <div className="w-full pb-10">
         <div className="max-w-full bg-white flex flex-col rounded-lg overflow-hidden shadow-lg border">
-          <div className="flex flex-row items-center flex-nowrap bg-gray-100 p-2">
-            <CarIcon className="h-5 w-5 text-gray-500" />
-            <h1 className="ml-2 uppercase font-bold text-gray-500">Voyage</h1>
-            <p className="ml-2 font-normal text-gray-500">{formatDate(date)}</p>
+          <div className="flex flex-row items-center flex-nowrap bg-gray-100 p-2 justify-between px-4">
+            <div className="flex">
+              <CarIcon className="h-5 w-5 text-gray-500" />
+              <h1 className="ml-2 uppercase font-bold text-gray-500">Voyage</h1>
+              <p className="ml-2 font-normal text-gray-500">
+                {formatDate(date)}
+              </p>
+            </div>
+            <p className="text-gray-500">
+              <span className="text-2xl italic font-bold pr-1">
+                {placeDispo}
+              </span>{" "}
+              place(s) restante(s)
+            </p>
           </div>
           <div className="mt-2 flex justify-start bg-white p-2">
             <div className="flex mx-2 ml-6 h8 px-2 flex-row items-center rounded-full bg-gray-100 p-1">
@@ -66,40 +83,41 @@ const ReservationCard = ({
             </div>
             <div className="flex flex-col flex-wrap p-2">
               <p className="text-xs text-slate-500">Arrivée</p>
-              <p className="text-xl font-bold">{villeArrv}</p>
+              <p className="text-xl font-bold">{villeArriv}</p>
               <p className="font-bold text-gray-500">{heureArriv}</p>
             </div>
           </div>
           <div className="mt-4 bg-gray-100 flex flex-row flex-wrap md:flex-nowrap justify-between items-baseline">
             <div className="flex mx-6 py-4 flex-row flex-wrap">
-              <div className="text-sm mx-2 flex flex-col">
-                <p className="">Ticket Standard</p>
-                <p className="font-bold">MAD {prix}</p>
-                <p className="text-xs text-gray-500">Non-remboursable</p>
+              <div className="text-sm mx-2 flex gap-x-12">
+                <div className="flex flex-col items-center">
+                  <p className="text-sm text-gray-500">Prix unite</p>
+                  <p className="gap-2 font-bold ">MAD {prix}</p>
+                </div>
+                <div className="flex gap-2">
+                  <select
+                    className="bg-white rounded-md"
+                    name="placeReserv"
+                    value={placeReserv}
+                    onChange={(e) =>
+                      setPlaceReserv(parseInt(e.target.value, 10))
+                    }
+                  >
+                    {Array.from({ length: placeDispo }, (_, i) => i + 1).map(
+                      (num) => (
+                        <option key={num} value={num}>
+                          {num} x Ticket
+                        </option>
+                      )
+                    )}
+                  </select>
+                </div>
               </div>
-              <button className="w-32 h-11 rounded flex border-solid border bg-white mx-2 justify-center place-items-center">
-                <div className="">Reserver</div>
-              </button>
             </div>
             <div className="md:border-l-2 mx-6 md:border-dotted flex flex-row py-4 mr-6 flex-wrap">
               <div className="text-sm mx-2 flex flex-col">
-                <p>Ticket Flexible</p>
-                <p className="font-bold">MAD {prix + 200}</p>
-                <p className="text-xs text-gray-500">Remboursable</p>
-                <p>place dispo {placeDispo}</p>
-                <select
-                  name="placeReserv"
-                  value={placeReserv}
-                  onChange={(e) => setPlaceReserv(parseInt(e.target.value, 10))}
-                >
-                  {Array.from({ length: placeDispo }, (_, i) => i + 1).map(
-                    (num) => (
-                      <option key={num} value={num}>
-                        {num}
-                      </option>
-                    )
-                  )}
-                </select>
+                <p className="text-sm text-gray-500">Prix total</p>
+                <p className="font-bold">MAD {prix * placeReserv}</p>
               </div>
               <button className="w-32 h-11 rounded flex border-solid border text-white bg-green-800 mx-2 justify-center place-items-center">
                 <div className="">Reserver</div>

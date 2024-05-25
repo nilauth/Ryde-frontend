@@ -61,21 +61,29 @@ export default function ClientRechercheOffresPage() {
     }
   };
 
-  const handleCardSubmit = async (e, placeReserv, client_id, offre_id) => {
+  const handleCardSubmit = async (
+    e,
+    placeReserv,
+    totalPrice,
+    client_id,
+    offre_id
+  ) => {
     e.preventDefault();
-    console.log(client_id, offre_id, placeReserv);
+    // console.log(client_id, offre_id, placeReserv, totalPrice);
+    console.log(offers);
     try {
       const response = await axios.post(
         `${UserService.BASE_URL}/user/add-reservation`,
-        { offreid: offre_id, userid: client_id, placeReserv },
+        { offreid: offre_id, userid: client_id, placeReserv, prix: totalPrice },
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token") || ""}`,
           },
         }
       );
-      console.log(currentUser);
-      console.log(response);
+      // console.log(currentUser);
+      // console.log(response);
+      console.log("total price2:", totalPrice);
     } catch (err) {
       console.error("Error:", err);
     }
@@ -141,44 +149,34 @@ export default function ClientRechercheOffresPage() {
             </Button>
           </form>
         </div>
-        <div className="flex flex-col justify-center items-center w-full">
-          <ScrollArea className="h-[calc(100vh-74px)] pr-10 pt-8">
-            {searchDone ? (
-              offers.length > 0 ? (
-                offers.filter((offer) => offer.statusOffres > 0).length > 0 ? (
-                  offers
-                    .filter((offer) => offer.statusOffres > 0)
-                    .map((offer) => (
-                      <ReservationCard
-                        key={offer.id}
-                        date={offer.date}
-                        driverId={offer.driverId}
-                        id={offer.id}
-                        prix={offer.prix}
-                        villeDepart={offer.villeDepart}
-                        villeArrv={offer.villeArriv}
-                        heureDepart={offer.heureDepart}
-                        heureArriv={offer.heureArriv}
-                        placeDispo={offer.placeDispo}
-                        handleSubmit={(e, placeReserv) =>
-                          handleCardSubmit(
-                            e,
-                            placeReserv,
-                            currentUser?.id,
-                            offer.id
-                          )
-                        }
-                      />
-                    ))
-                ) : (
-                  <h1>Aucune offre disponible</h1>
+        <ScrollArea className="h-[calc(100vh-74px)] pr-10 pt-8">
+          {searchDone && offers.length === 0 && (
+            <p className="text-center text-gray-500">Aucune offre trouvée</p>
+          )}
+          {offers.map((offer) => (
+            <ReservationCard
+              key={offer.id}
+              id={offer.id}
+              date={offer.date}
+              driverId={offer.driverId}
+              placeDispo={offer.placeDispo}
+              prix={offer.prix}
+              villeDepart={offer.villeDepart}
+              villeArriv={offer.villeArriv}
+              heureDepart={offer.heureDepart}
+              heureArriv={offer.heureArriv}
+              handleSubmit={(e, placeReserv, totalPrice) =>
+                handleCardSubmit(
+                  e,
+                  placeReserv,
+                  totalPrice,
+                  currentUser.id,
+                  offer.id
                 )
-              ) : (
-                <h1>Aucune offre disponible</h1>
-              )
-            ) : null}
-          </ScrollArea>
-        </div>
+              }
+            />
+          ))}
+        </ScrollArea>
       </main>
     </>
   );
