@@ -23,7 +23,7 @@ const ReservationCardDone = ({
   heureArriv,
 }) => {
   return (
-    <div className="w-full pb-10">
+    <div className="w-full pb-10 min-w-[600px]">
       <div className="max-w-full bg-white flex flex-col rounded-lg overflow-hidden shadow-lg border">
         <div className="flex flex-row items-center flex-nowrap bg-gray-100 p-2">
           <CarIcon className="h-5 w-5 text-gray-500" />

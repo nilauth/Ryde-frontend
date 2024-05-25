@@ -1,7 +1,7 @@
 import UserService from "@/services/userService";
 import { useEffect, useState } from "react";
 import ReservationCardDone from "../components/ReservationCardDone";
-
+import { ScrollArea } from "@/components/ui/scroll-area";
 const ClientReservationsPage = () => {
   const [currentUser, setCurrentUser] = useState(null);
   const [reservationList, setReservationList] = useState([]);
@@ -16,7 +16,12 @@ const ClientReservationsPage = () => {
             user.id,
             localStorage.getItem("token") || ""
           );
-          setReservationList(resList); // Set the entire list object
+
+          const filteredResList = resList.filter((reservation) => {
+            console.log(reservation);
+            return reservation.statusVoyages === true;
+          });
+          setReservationList(filteredResList);
         }
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -26,32 +31,30 @@ const ClientReservationsPage = () => {
     fetchData();
   }, []);
 
-  console.log(reservationList);
+  // console.log(reservationList);
   return (
-    <div>
-      {reservationList.length > 0 ? (
-        <ul className="flex justify-center items-center flex-col space-y-4 pt-4">
-          {reservationList.map((reservation, index) => (
-            <li key={index} className="w-1/3">
-              <ReservationCardDone
-                id={reservation.id}
-                date={reservation.date}
-                driverId={reservation.driverId}
-                placeDispo={reservation.placeDispo}
-                prix={reservation.prix}
-                villeDepart={reservation.villeDepart}
-                villeArrv={reservation.villeArriv}
-                heureDepart={reservation.heureDepart}
-                heureArriv={reservation.heureArriv}
-              />
-              {/* Assuming 'id' is a property */}
-              {/* Add more details like name, date etc. based on your data structure */}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No reservations found.</p>
-      )}
+    <div className="container">
+      <ScrollArea className="h-[calc(100vh-74px)] pr-10">
+        {reservationList.length > 0 ? (
+          <ul className="flex justify-center items-center flex-col space-y-4 pt-4">
+            {reservationList.map((reservation, index) => (
+              <li key={index} className="w-1/3">
+                <ReservationCardDone
+                  id={reservation.id}
+                  date={reservation.date}
+                  driverId={reservation.driverId}
+                  placeDispo={reservation.placeDispo}
+                  prix={reservation.prix}
+                  villeDepart={reservation.villeDepart}
+                  villeArrv={reservation.villeArriv}
+                  heureDepart={reservation.heureDepart}
+                  heureArriv={reservation.heureArriv}
+                />
+              </li>
+            ))}
+          </ul>
+        ) : null}
+      </ScrollArea>
     </div>
   );
 };
