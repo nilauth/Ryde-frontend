@@ -101,8 +101,8 @@ export default function Component() {
 
   return (
     <div className="flex justify-center items-center mt-20">
-      <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8 w-full max-w-md border">
-        <h1 className="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100">
+      <div className="dark:bg-gray-800 shadow-lg rounded-lg p-8 w-full max-w-2xl border bg-yellow-300">
+        <h1 className="text-4xl  mb-4 dark:text-gray-100 uppercase tracking-wide font-extrabold text-center pb-5 text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
           Créer un nouveau offre
         </h1>
         <form className="space-y-4" onSubmit={handleSubmit}>
@@ -114,7 +114,7 @@ export default function Component() {
               Ville de départ
             </label>
             <select
-              className="w-full p-2 border"
+              className="w-full p-2 border border-slate-500 rounded-md bg-white"
               id="villeDepart"
               name="villeDepart"
               value={formData.villeDepart}
@@ -137,7 +137,7 @@ export default function Component() {
               Ville d'arrivée
             </label>
             <select
-              className="w-full p-2 border"
+              className="w-full p-2 border border-slate-500 rounded-md bg-white"
               id="villeArriv"
               name="villeArriv"
               value={formData.villeArriv}
@@ -154,7 +154,7 @@ export default function Component() {
           </div>
           <div>
             <label
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+              className="block text-sm font-medium text-gray-700"
               htmlFor="date"
             >
               Date
@@ -163,7 +163,7 @@ export default function Component() {
               type="date"
               id="date"
               name="date"
-              className="w-full p-2 border"
+              className="w-full p-2 border border-slate-500 rounded-md"
               value={formData.date}
               onChange={handleChange}
               required
@@ -180,7 +180,7 @@ export default function Component() {
               name="heureDepart"
               id="heureDepart"
               type="time"
-              className="w-full p-2 border"
+              className="w-full p-2 border border-slate-500 rounded-md"
               value={formData.heureDepart}
               onChange={handleChange}
               required
@@ -197,51 +197,53 @@ export default function Component() {
               name="heureArriv"
               id="heureArriv"
               type="time"
-              className="w-full p-2 border"
+              className="w-full p-2 border border-slate-500 rounded-md"
               value={formData.heureArriv}
               onChange={handleChange}
               required
             />
           </div>
-          <div>
-            <label
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-              htmlFor="prix"
-            >
-              Prix
-            </label>
-            <div className="flex items-center space-x-2">
+          <div className="grid grid-cols-2 gap-x-16">
+            <div>
+              <label
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                htmlFor="prix"
+              >
+                Prix (DHS)
+              </label>
+              <div className="flex items-center space-x-2">
+                <input
+                  name="prix"
+                  id="prix"
+                  type="number"
+                  className="p-2 border border-slate-500 rounded-md"
+                  value={formData.prix}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                htmlFor="placeDispo"
+              >
+                Nombres de place
+              </label>
               <input
-                name="prix"
-                id="prix"
+                name="placeDispo"
+                id="placeDispo"
                 type="number"
-                className="w-20 p-2 border"
-                value={formData.prix}
+                className="p-2 border border-slate-500 rounded-md"
+                value={formData.placeDispo}
                 onChange={handleChange}
                 required
               />
-              <span>DH</span>
             </div>
           </div>
-          <div>
-            <label
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-              htmlFor="placeDispo"
-            >
-              Nombres de place
-            </label>
-            <input
-              name="placeDispo"
-              id="placeDispo"
-              type="number"
-              className="w-full p-2 border"
-              value={formData.placeDispo}
-              onChange={handleChange}
-              required
-            />
-          </div>
+
           <Button
-            className="w-full"
+            className="w-full text-2xl font-bold py-6"
             type="submit"
             onClick={() =>
               toast("Offre créée avec succès!", {

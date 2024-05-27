@@ -85,7 +85,7 @@ export default function conducteurHistoriqueVoyages() {
         )}
         {offers.map(
           (offer) =>
-            !offer.statusOffres && (
+            !offer.statusVoyages && (
               <ReservationCardConducteur
                 key={offer.id}
                 id={offer.id}

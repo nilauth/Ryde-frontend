@@ -1,7 +1,8 @@
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { UserNav } from "./UserNav";
+import UserService from "@/services/userService";
 
 const ConducteurNavigation = ({ isAuth }: { isAuth: boolean }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(isAuth);
