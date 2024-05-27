@@ -236,7 +236,7 @@ class UserService {
     }
   }
 
-  //
+  // conducteur methods
 
   static async getAllOffresClient(userId: number, token: string) {
     try {
@@ -247,6 +247,70 @@ class UserService {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
+      return response.data;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  static async getAllOffresConducteur(userId: number, token: string) {
+    try {
+      const response = await axios.get(
+        `${UserService.BASE_URL}/driver/get-offers/${userId}`,
+
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      return response.data;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  // delete reservation
+  static async deleteReservation(
+    idReservation: number,
+    prix: number,
+    token: string
+  ) {
+    try {
+      const response = await axios.delete(
+        `${this.BASE_URL}/user/delete-reservation/${idReservation}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+          data: { prix: prix },
+        }
+      );
+      return response.data;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  static async fermerOffre(idOffre: number, token: string) {
+    try {
+      const response = await axios.get(
+        `${this.BASE_URL}/driver/closeOffer/${idOffre}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      return response.data;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  static async cloturerVoyage(idOffre: number, token: string) {
+    try {
+      const response = await axios.get(
+        `${this.BASE_URL}/driver/closeVoyage/${idOffre}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      console.log(token);
       return response.data;
     } catch (err) {
       throw err;

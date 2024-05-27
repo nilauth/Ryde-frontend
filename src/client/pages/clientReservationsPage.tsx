@@ -49,6 +49,7 @@ const ClientReservationsPage = () => {
                   villeArrv={reservation.villeArriv}
                   heureDepart={reservation.heureDepart}
                   heureArriv={reservation.heureArriv}
+                  idReservation={reservation.idReservation}
                 />
               </li>
             ))}

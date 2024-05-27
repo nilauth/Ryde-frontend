@@ -1,4 +1,4 @@
-  import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import UserService from "@/services/userService";
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
@@ -14,8 +14,8 @@ export default function Component() {
     date: "",
     heureArriv: "",
     prix: 50.0,
-    placeDispo:"",
-    placeInitiale:"",
+    placeDispo: "",
+    placeInitiale: "",
     statusOffres: true,
     statusVoyages: true,
   });
@@ -57,7 +57,7 @@ export default function Component() {
       await UserService.ajouterOffre(
         {
           ...formData,
-          placeInitiale:formData.placeDispo,
+          placeInitiale: formData.placeDispo,
           // heureDepart: convertTimeToISO(formData.heureDepart),
           // heureArriv: convertTimeToISO(formData.heureArriv),
           id: uuidv4(),
@@ -91,45 +91,63 @@ export default function Component() {
   };
 
   return (
-    <div className='flex justify-center items-center h-screen bg-gray-100 dark:bg-gray-900'>
-      <div className='bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8 w-full max-w-md'>
-        <h1 className='text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100'>Créer un nouveau offre</h1>
-        <form className='space-y-4' onSubmit={handleSubmit}>
+    <div className="flex justify-center items-center h-screen bg-gray-100 dark:bg-gray-900">
+      <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8 w-full max-w-md">
+        <h1 className="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100">
+          Créer un nouveau offre
+        </h1>
+        <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
-            <label className='block text-sm font-medium text-gray-700 dark:text-gray-300' htmlFor='to'>
+            <label
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+              htmlFor="to"
+            >
               Ville de départ
             </label>
             <input
-              className='w-full p-2 border'
-              id='villeDepart'
-              name='villeDepart'
-              placeholder='Enter drop-off location'
-              type='text'
+              className="w-full p-2 border"
+              id="villeDepart"
+              name="villeDepart"
+              placeholder="Enter drop-off location"
+              type="text"
               value={formData.villeDepart}
               onChange={handleChange}
               required
             />
           </div>
           <div>
-            <label className='block text-sm font-medium text-gray-700 dark:text-gray-300' htmlFor='villeArriv'>
+            <label
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+              htmlFor="villeArriv"
+            >
               Ville d'arrivée
             </label>
             <input
-              className='w-full p-2 border'
-              id='villeArriv'
-              name='villeArriv'
-              placeholder='Enter pickup location'
-              type='text'
+              className="w-full p-2 border"
+              id="villeArriv"
+              name="villeArriv"
+              placeholder="Enter pickup location"
+              type="text"
               value={formData.villeArriv}
               onChange={handleChange}
               required
             />
           </div>
           <div>
-            <label className='block text-sm font-medium text-gray-700 dark:text-gray-300' htmlFor='date'>
+            <label
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+              htmlFor="date"
+            >
               Date
             </label>
-            <input type='date' id='date' name='date' value={formData.date} onChange={handleChange} required />
+            <input
+              type="date"
+              id="date"
+              name="date"
+              value={formData.date}
+              onChange={handleChange}
+              required
+            />
           </div>
           {/* <div>
             <label className='block text-sm font-medium text-gray-700 dark:text-gray-300' htmlFor='driverId'>
@@ -146,41 +164,50 @@ export default function Component() {
           </div> */}
 
           <div>
-            <label className='block text-sm font-medium text-gray-700 dark:text-gray-300' htmlFor='heureDepart'>
+            <label
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+              htmlFor="heureDepart"
+            >
               Heure de départ
             </label>
             <input
-              name='heureDepart'
-              id='heureDepart'
-              type='time'
+              name="heureDepart"
+              id="heureDepart"
+              type="time"
               value={formData.heureDepart}
               onChange={handleChange}
               required
             />
           </div>
           <div>
-            <label className='block text-sm font-medium text-gray-700 dark:text-gray-300' htmlFor='heureArriv'>
+            <label
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+              htmlFor="heureArriv"
+            >
               Heure d'arrivée
             </label>
             <input
-              name='heureArriv'
-              id='heureArriv'
-              type='time'
+              name="heureArriv"
+              id="heureArriv"
+              type="time"
               value={formData.heureArriv}
               onChange={handleChange}
               required
             />
           </div>
           <div>
-            <label className='block text-sm font-medium text-gray-700 dark:text-gray-300' htmlFor='prix'>
+            <label
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+              htmlFor="prix"
+            >
               Prix
             </label>
-            <div className='flex space-x-2'>
+            <div className="flex space-x-2">
               <input
-                name='prix'
-                id='prix'
-                type='text'
-                className='w-[50px] border'
+                name="prix"
+                id="prix"
+                type="text"
+                className="w-[50px] border"
                 value={formData.prix}
                 onChange={handleChange}
                 required
@@ -189,20 +216,23 @@ export default function Component() {
             </div>
           </div>
           <div>
-            <label className='block text-sm font-medium text-gray-700 dark:text-gray-300' htmlFor='placeDispo'>
+            <label
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+              htmlFor="placeDispo"
+            >
               Nombres de place
             </label>
             <input
-              name='placeDispo'
-              id='placeDispo'
-              type='number'
-              className='border'
+              name="placeDispo"
+              id="placeDispo"
+              type="number"
+              className="border"
               value={formData.placeDispo}
               onChange={handleChange}
               required
             />
           </div>
-          <Button className='w-full' type='submit'>
+          <Button className="w-full" type="submit">
             Ajouter offre
           </Button>
         </form>

@@ -26,6 +26,10 @@ import TestPage from "./client/pages/testPage";
 import TrajetDetailsPage from "./client/pages/trajetDetailsPage";
 import AjouterTrajetPage from "./conducteur/ajouterTrajetPage";
 import ClientRechercheOffresPage from "./client/pages/clientRechercheOffresPage";
+import ConducteurDashboardLayoutPage from "./conducteur/conducteurDashboardLayoutPage";
+import ConducteurCreerOffre from "./conducteur/conducteurCreerOffre";
+import ConducteurMesOffres from "./conducteur/conducteurMesOffres";
+import ConducteurHistoriqueVoyages from "./conducteur/conducteurHistoriqueVoyages";
 
 const router = createBrowserRouter([
   {
@@ -49,8 +53,8 @@ const router = createBrowserRouter([
 
   // course routes
   {
-    path: "/course/ajouter-trajet",
-    element: <AjouterTrajetPage />,
+    // path: "/course/ajouter-trajet",
+    // element: <AjouterTrajetPage />,
   },
 
   {
@@ -82,6 +86,19 @@ const router = createBrowserRouter([
     ],
   },
   // conducteur routes
+
+  {
+    path: "/conducteur",
+    element: <ConducteurDashboardLayoutPage />,
+    children: [
+      { path: "creer-offre", element: <ConducteurCreerOffre /> },
+      {
+        path: "mes-offres",
+        element: <ConducteurMesOffres />,
+      },
+      { path: "historique-voyages", element: <ConducteurHistoriqueVoyages /> },
+    ],
+  },
 
   // client routes
   {

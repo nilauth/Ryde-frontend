@@ -22,7 +22,10 @@ const ReservationCard = ({
   villeArriv,
   heureDepart,
   heureArriv,
+  statusOffre,
   handleSubmit,
+  handleCloseOffer, // Add handleCloseOffer prop
+  handleCloturerVoyage,
 }) => {
   const [placeReserv, setPlaceReserv] = useState(1);
   const [totalPrice, setTotalPrice] = useState(prix);
@@ -38,6 +41,8 @@ const ReservationCard = ({
     handleSubmit(e, placeReserv, totalPrice);
   };
 
+  console.log(statusOffre);
+
   return (
     <form onSubmit={onFormSubmit}>
       <div className="w-full pb-10">
@@ -45,7 +50,9 @@ const ReservationCard = ({
           <div className="flex flex-row items-center flex-nowrap bg-gray-100 p-2 justify-between px-4">
             <div className="flex">
               <CarIcon className="h-5 w-5 text-gray-500" />
-              <h1 className="ml-2 uppercase font-bold text-gray-500">Voyage</h1>
+              <h1 className="ml-2 uppercase font-bold text-gray-500">
+                Voyages {statusOffre ? "" : "(Offre ferme)"}
+              </h1>
               <p className="ml-2 font-normal text-gray-500">
                 {formatDate(date)}
               </p>
@@ -90,38 +97,27 @@ const ReservationCard = ({
           <div className="mt-4 bg-gray-100 flex flex-row flex-wrap md:flex-nowrap justify-between items-baseline">
             <div className="flex mx-6 py-4 flex-row flex-wrap">
               <div className="text-sm mx-2 flex gap-x-12">
-                <div className="flex flex-col items-center">
-                  <p className="text-sm text-gray-500">Prix unite</p>
-                  <p className="gap-2 font-bold ">MAD {prix}</p>
-                </div>
-                <div className="flex gap-2">
-                  <select
-                    className="bg-white rounded-md px-2"
-                    name="placeReserv"
-                    value={placeReserv}
-                    onChange={(e) =>
-                      setPlaceReserv(parseInt(e.target.value, 10))
-                    }
-                  >
-                    {Array.from({ length: placeDispo }, (_, i) => i + 1).map(
-                      (num) => (
-                        <option key={num} value={num}>
-                          {num} x {num > 1 ? "Tickets" : "Ticket"}
-                        </option>
-                      )
-                    )}
-                  </select>
-                </div>
+                {/* Additional content can go here */}
               </div>
             </div>
             <div className="md:border-l-2 mx-6 md:border-dotted flex flex-row py-4 mr-6 flex-wrap">
-              <div className="text-sm mx-2 flex flex-col">
-                <p className="text-sm text-gray-500">Prix total</p>
-                <p className="font-bold">MAD {prix * placeReserv}</p>
-              </div>
-              <button className="w-32 h-11 rounded flex border-solid border text-white bg-green-800 mx-2 justify-center place-items-center">
-                <div className="">Reserver</div>
-              </button>
+              {statusOffre ? (
+                <button
+                  type="button"
+                  className="w-32 h-11 rounded flex border-solid border text-white bg-red-500 mx-2 justify-center place-items-center"
+                  onClick={() => handleCloseOffer(id)} // Call handleCloseOffer with offer ID
+                >
+                  Fermer offre
+                </button>
+              ) : (
+                <button
+                  className="w-34 h-11 rounded flex border-solid border text-white bg-slate-800 mx-2 px-2 justify-center place-items-center"
+                  type="button"
+                  onClick={() => handleCloturerVoyage(id)}
+                >
+                  Cloturer voyage
+                </button>
+              )}
             </div>
           </div>
         </div>
