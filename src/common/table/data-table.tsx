@@ -9,18 +9,31 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-  filerBy: string;
+  filterBy: string;
 }
 
-export function DataTable<TData, TValue>({ columns, data, filerBy }: DataTableProps<TData, TValue>) {
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
+export function DataTable<TData, TValue>({
+  columns,
+  data,
+  filterBy,
+}: DataTableProps<TData, TValue>) {
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+    []
+  );
 
   const table = useReactTable({
     data,
@@ -36,23 +49,30 @@ export function DataTable<TData, TValue>({ columns, data, filerBy }: DataTablePr
 
   return (
     <div>
-      <div className='flex items-center py-4'>
+      <div className="flex items-center py-4">
         <Input
-          placeholder={`Filtrer par ${filerBy}...`}
-          value={(table.getColumn(filerBy)?.getFilterValue() as string) ?? ""}
-          onChange={(event) => table.getColumn(filerBy)?.setFilterValue(event.target.value)}
-          className='max-w-sm'
+          placeholder={`Filtrer par ${filterBy}...`}
+          value={(table.getColumn(filterBy)?.getFilterValue() as string) ?? ""}
+          onChange={(event) =>
+            table.getColumn(filterBy)?.setFilterValue(event.target.value)
+          }
+          className="max-w-sm"
         />
       </div>
-      <div className='rounded-md border'>
+      <div className="rounded-md border">
         <Table>
-          <TableHeader className='bg-slate-100'>
+          <TableHeader className="bg-slate-100">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
                     <TableHead key={header.id}>
-                      {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
                     </TableHead>
                   );
                 })}
@@ -62,15 +82,26 @@ export function DataTable<TData, TValue>({ columns, data, filerBy }: DataTablePr
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
+                <TableRow
+                  key={row.id}
+                  data-state={row.getIsSelected() && "selected"}
+                >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+                    <TableCell key={cell.id}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </TableCell>
                   ))}
                 </TableRow>
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={columns.length} className='h-24 text-center'>
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-24 text-center"
+                >
                   No results.
                 </TableCell>
               </TableRow>
@@ -78,11 +109,21 @@ export function DataTable<TData, TValue>({ columns, data, filerBy }: DataTablePr
           </TableBody>
         </Table>
       </div>
-      <div className='flex items-center justify-end space-x-2 py-4'>
-        <Button variant='outline' size='sm' onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
+      <div className="flex items-center justify-end space-x-2 py-4">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => table.previousPage()}
+          disabled={!table.getCanPreviousPage()}
+        >
           Précédent
         </Button>
-        <Button variant='outline' size='sm' onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => table.nextPage()}
+          disabled={!table.getCanNextPage()}
+        >
           Suivant
         </Button>
       </div>

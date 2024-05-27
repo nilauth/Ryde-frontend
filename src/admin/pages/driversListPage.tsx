@@ -1,30 +1,48 @@
-import { Conducteur, columns as ConducteurColumns } from "@/common/table/columnsConducteur";
+import { columns as clientColumns, Client } from "@/common/table/columnsClient";
 import { DataTable } from "@/common/table/data-table";
+import { useEffect, useState } from "react";
+import UserService from "@/services/userService";
 
-const conducteurs: Conducteur[] = [
-  {
-    id: "1",
-    nomComplet: "Jean Dupont",
-    cin: "ABC123456",
-    marqueVoiture: "Toyota",
-    statut: "disponible",
-    email: "jean@example.com",
-  },
-  {
-    id: "2",
-    nomComplet: "Marie Martin",
-    cin: "DEF789012",
-    marqueVoiture: "Honda",
-    statut: "occupé",
-    email: "marie@example.com",
-  },
-];
-const DriversList = () => {
+const ClientsList = () => {
+  const [clients, setClients] = useState<Client[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchClients = async () => {
+      try {
+        const token = localStorage.getItem("token") || "";
+        const res = await UserService.getAllUsers(token);
+        const usersWithRoleConducteur = res.ourUsersList.filter(
+          (user: Client) => user.role === "CONDUCTEUR"
+        );
+        setClients(usersWithRoleConducteur);
+        setLoading(false);
+        console.log(usersWithRoleConducteur);
+      } catch (error) {
+        setError("Error fetching clients");
+        setLoading(false);
+      }
+    };
+
+    fetchClients();
+
+    return () => {};
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
   return (
     <div>
-      <DataTable columns={ConducteurColumns} data={conducteurs} filerBy='cin' />
+      <DataTable columns={clientColumns} data={clients} filterBy="cin" />
     </div>
   );
 };
 
-export default DriversList;
+export default ClientsList;

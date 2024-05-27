@@ -1,13 +1,7 @@
 import { columns as clientColumns, Client } from "@/common/table/columnsClient";
 import { DataTable } from "@/common/table/data-table";
-import { useEffect, useState } from "react"; // Importing useEffect and useState
-// import { Client } from "@/common/table/columnsClient";
-// import { DataTable } from "@/common/table/data-table";
+import { useEffect, useState } from "react";
 import UserService from "@/services/userService";
-
-
-
-
 
 const ClientsList = () => {
   const [clients, setClients] = useState<Client[]>([]);
@@ -19,9 +13,12 @@ const ClientsList = () => {
       try {
         const token = localStorage.getItem("token") || "";
         const res = await UserService.getAllUsers(token);
-        setClients(res.ourUsersList);
+        const usersWithRoleUser = res.ourUsersList.filter(
+          (user: Client) => user.role === "USER"
+        );
+        setClients(usersWithRoleUser);
         setLoading(false);
-        console.log(res.ourUsersList);
+        console.log(usersWithRoleUser);
       } catch (error) {
         setError("Error fetching clients");
         setLoading(false);
@@ -30,9 +27,8 @@ const ClientsList = () => {
 
     fetchClients();
 
-    // Clean-up function if necessary
     return () => {};
-  }, []); // Empty dependency array ensures that this effect runs only once on mount
+  }, []);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -44,7 +40,7 @@ const ClientsList = () => {
 
   return (
     <div>
-      <DataTable columns={clientColumns} data={clients} filterBy='cin' />
+      <DataTable columns={clientColumns} data={clients} filterBy="cin" />
     </div>
   );
 };

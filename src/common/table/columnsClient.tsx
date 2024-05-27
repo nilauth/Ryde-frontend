@@ -1,24 +1,24 @@
 import { ColumnDef } from "@tanstack/react-table";
 
-// Define the shape of the Client data
 export type Client = {
   id: string;
   cin: string;
   nomComplet: string;
   email: string;
-  // Add more properties as needed
+  solde: number;
+  city: string;
+  role: string;
 };
 
-// Define columns for the Client data
 export const columns: ColumnDef<Client>[] = [
   {
     accessorKey: "id",
     header: "ID",
   },
-  // {
-  //   accessorKey: "cin",
-  //   header: "CIN",
-  // },
+  {
+    accessorKey: "cin",
+    header: "CIN",
+  },
   {
     accessorKey: "name",
     header: "Nom complet",
@@ -27,5 +27,16 @@ export const columns: ColumnDef<Client>[] = [
     accessorKey: "email",
     header: "Email",
   },
-  // Add more columns as needed
+  {
+    accessorKey: "solde",
+    header: "Solde",
+  },
+  {
+    accessorKey: "city",
+    header: "Ville",
+  },
+  {
+    accessorKey: "role",
+    header: "Rôle",
+  },
 ];
