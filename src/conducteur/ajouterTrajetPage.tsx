@@ -1,10 +1,14 @@
 import { Button } from "@/components/ui/button";
 import UserService from "@/services/userService";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 import { v4 as uuidv4 } from "uuid";
 
 export default function Component() {
   const [currentUser, setCurrentUser] = useState(null);
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     id: "",
     driverId: null, // Initialize driverId with null
@@ -20,16 +24,24 @@ export default function Component() {
     statusVoyages: true,
   });
 
-  function convertTimeToISO(timeString: string) {
-    // Split the time string into hours and minutes
-    const [hours, minutes] = timeString.split(":");
+  const cities = [
+    "Casablanca",
+    "Rabat",
+    "Fes",
+    "Marrakech",
+    "Tangier",
+    "Agadir",
+    "Meknes",
+    "Oujda",
+    "Kenitra",
+    "Tetouan",
+  ];
 
-    // Create a new Date object with today's date and the specified time
+  function convertTimeToISO(timeString) {
+    const [hours, minutes] = timeString.split(":");
     const date = new Date();
     date.setHours(parseInt(hours, 10));
     date.setMinutes(parseInt(minutes, 10));
-
-    // Return the ISO string representation of the date
     return date.toISOString();
   }
 
@@ -53,18 +65,15 @@ export default function Component() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Await for UserService.ajouterOffre to complete
       await UserService.ajouterOffre(
         {
           ...formData,
           placeInitiale: formData.placeDispo,
-          // heureDepart: convertTimeToISO(formData.heureDepart),
-          // heureArriv: convertTimeToISO(formData.heureArriv),
           id: uuidv4(),
         },
         localStorage.getItem("token") || ""
       );
-      // Log the user
+
       console.log(await myFunction());
     } catch (error) {
       console.error("Error adding ride:", error);
@@ -78,7 +87,7 @@ export default function Component() {
       return user;
     } catch (error) {
       console.error("Error:", error);
-      throw error; // Rethrow error to be caught by the caller
+      throw error;
     }
   };
 
@@ -91,8 +100,8 @@ export default function Component() {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100 dark:bg-gray-900">
-      <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8 w-full max-w-md">
+    <div className="flex justify-center items-center mt-20">
+      <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8 w-full max-w-md border">
         <h1 className="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100">
           Créer un nouveau offre
         </h1>
@@ -100,20 +109,25 @@ export default function Component() {
           <div>
             <label
               className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-              htmlFor="to"
+              htmlFor="villeDepart"
             >
               Ville de départ
             </label>
-            <input
+            <select
               className="w-full p-2 border"
               id="villeDepart"
               name="villeDepart"
-              placeholder="Enter drop-off location"
-              type="text"
               value={formData.villeDepart}
               onChange={handleChange}
               required
-            />
+            >
+              <option value="">Sélectionnez une ville</option>
+              {cities.map((city) => (
+                <option key={city} value={city}>
+                  {city}
+                </option>
+              ))}
+            </select>
           </div>
           <div>
             <label
@@ -122,16 +136,21 @@ export default function Component() {
             >
               Ville d'arrivée
             </label>
-            <input
+            <select
               className="w-full p-2 border"
               id="villeArriv"
               name="villeArriv"
-              placeholder="Enter pickup location"
-              type="text"
               value={formData.villeArriv}
               onChange={handleChange}
               required
-            />
+            >
+              <option value="">Sélectionnez une ville</option>
+              {cities.map((city) => (
+                <option key={city} value={city}>
+                  {city}
+                </option>
+              ))}
+            </select>
           </div>
           <div>
             <label
@@ -144,25 +163,12 @@ export default function Component() {
               type="date"
               id="date"
               name="date"
+              className="w-full p-2 border"
               value={formData.date}
               onChange={handleChange}
               required
             />
           </div>
-          {/* <div>
-            <label className='block text-sm font-medium text-gray-700 dark:text-gray-300' htmlFor='driverId'>
-              Driver id
-            </label>
-            <input
-              type='string'
-              id='driverId'
-              name='driverId'
-              value={formData.driverId}
-              onChange={handleChange}
-              defaultValue={currentUser?.id}
-            />
-          </div> */}
-
           <div>
             <label
               className="block text-sm font-medium text-gray-700 dark:text-gray-300"
@@ -174,6 +180,7 @@ export default function Component() {
               name="heureDepart"
               id="heureDepart"
               type="time"
+              className="w-full p-2 border"
               value={formData.heureDepart}
               onChange={handleChange}
               required
@@ -190,6 +197,7 @@ export default function Component() {
               name="heureArriv"
               id="heureArriv"
               type="time"
+              className="w-full p-2 border"
               value={formData.heureArriv}
               onChange={handleChange}
               required
@@ -202,17 +210,17 @@ export default function Component() {
             >
               Prix
             </label>
-            <div className="flex space-x-2">
+            <div className="flex items-center space-x-2">
               <input
                 name="prix"
                 id="prix"
-                type="text"
-                className="w-[50px] border"
+                type="number"
+                className="w-20 p-2 border"
                 value={formData.prix}
                 onChange={handleChange}
                 required
               />
-              <div>DH</div>
+              <span>DH</span>
             </div>
           </div>
           <div>
@@ -226,13 +234,27 @@ export default function Component() {
               name="placeDispo"
               id="placeDispo"
               type="number"
-              className="border"
+              className="w-full p-2 border"
               value={formData.placeDispo}
               onChange={handleChange}
               required
             />
           </div>
-          <Button className="w-full" type="submit">
+          <Button
+            className="w-full"
+            type="submit"
+            onClick={() =>
+              toast("Offre créée avec succès!", {
+                description:
+                  "Vous pouvez maintenant visualiser vos offres créées.",
+                position: "top-right",
+                action: {
+                  label: "Mes offres",
+                  onClick: () => navigate("/conducteur/mes-offres"),
+                },
+              })
+            }
+          >
             Ajouter offre
           </Button>
         </form>

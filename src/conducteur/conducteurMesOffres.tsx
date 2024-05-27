@@ -3,6 +3,8 @@ import UserService from "@/services/userService";
 import { useEffect, useState } from "react";
 import ReservationCardConducteur from "./components/ReservationCardConducteur";
 
+import { Toaster } from "sonner";
+
 export default function ConducteurMesOffres() {
   const [currentUser, setCurrentUser] = useState(null);
   const [offers, setOffers] = useState([]);
@@ -83,33 +85,38 @@ export default function ConducteurMesOffres() {
         {searchDone && offers.length === 0 && (
           <p className="text-center text-gray-500">Vous n'avez aucun offre.</p>
         )}
-        {offers.map((offer) => (
-          <ReservationCardConducteur
-            key={offer.id}
-            id={offer.id}
-            date={offer.date}
-            statusOffre={offer.statusOffres}
-            driverId={offer.driverId}
-            placeDispo={offer.placeDispo}
-            prix={offer.prix}
-            villeDepart={offer.villeDepart}
-            villeArriv={offer.villeArriv}
-            heureDepart={offer.heureDepart}
-            heureArriv={offer.heureArriv}
-            handleSubmit={(e, placeReserv, totalPrice) =>
-              handleCardSubmit(
-                e,
-                placeReserv,
-                totalPrice,
-                currentUser.id,
-                offer.id
-              )
-            }
-            handleCloseOffer={handleCloseOffer}
-            handleCloturerVoyage={handleCloturerVoyage}
-          />
-        ))}
+        {offers.map(
+          (offer) =>
+            offer.statusVoyages && (
+              <ReservationCardConducteur
+                key={offer.id}
+                id={offer.id}
+                date={offer.date}
+                statusOffre={offer.statusOffres}
+                statusVoyages={offer.statusVoyages}
+                driverId={offer.driverId}
+                placeDispo={offer.placeDispo}
+                prix={offer.prix}
+                villeDepart={offer.villeDepart}
+                villeArriv={offer.villeArriv}
+                heureDepart={offer.heureDepart}
+                heureArriv={offer.heureArriv}
+                handleSubmit={(e, placeReserv, totalPrice) =>
+                  handleCardSubmit(
+                    e,
+                    placeReserv,
+                    totalPrice,
+                    currentUser.id,
+                    offer.id
+                  )
+                }
+                handleCloseOffer={handleCloseOffer}
+                handleCloturerVoyage={handleCloturerVoyage}
+              />
+            )
+        )}
       </ScrollArea>
+      <Toaster />
     </main>
   );
 }
