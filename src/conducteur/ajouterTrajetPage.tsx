@@ -101,8 +101,8 @@ export default function Component() {
 
   return (
     <div className="flex justify-center items-center mt-20">
-      <div className="dark:bg-gray-800 shadow-lg rounded-lg p-8 w-full max-w-2xl border bg-yellow-300">
-        <h1 className="text-4xl  mb-4 dark:text-gray-100 uppercase tracking-wide font-extrabold text-center pb-5 text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
+      <div className="dark:bg-gray-800 shadow-lg rounded-lg p-8 w-full max-w-2xl border">
+        <h1 className="text-4xl  mb-4 dark:text-gray-100 uppercase tracking-wide font-extrabold text-center pb-5">
           Créer un nouveau offre
         </h1>
         <form className="space-y-4" onSubmit={handleSubmit}>

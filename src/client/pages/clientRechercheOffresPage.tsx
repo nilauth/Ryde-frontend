@@ -12,6 +12,19 @@ export default function ClientRechercheOffresPage() {
     date: "",
   });
 
+  const cities = [
+    "Casablanca",
+    "Rabat",
+    "Fes",
+    "Marrakech",
+    "Tangier",
+    "Agadir",
+    "Meknes",
+    "Oujda",
+    "Kenitra",
+    "Tetouan",
+  ];
+
   const [currentUser, setCurrentUser] = useState(null);
   const [searchDone, setSearchDone] = useState(false);
   const [offers, setOffers] = useState([]);
@@ -91,42 +104,61 @@ export default function ClientRechercheOffresPage() {
 
   return (
     <>
-      <main className="w-full mx-auto px-4 sm:px-6 lg:grid lg:grid-cols-2 container">
+      <main className="w-full mx-auto px-4 sm:px-6 lg:grid lg:grid-cols-2 container space-x-10">
         <div className="flex flex-col gap-16 w-full grid-cols-1 pt-8">
           <form
             className="grid gap-6 bg-gray-100 dark:bg-gray-800 p-6 rounded-lg max-w-2xl"
             onSubmit={handleSubmit}
           >
-            <div className="grid sm:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <label className="text-sm font-medium" htmlFor="villeDepart">
+            <div className="grid grid-cols-2 space-x-2">
+              <div>
+                <label
+                  className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                  htmlFor="villeDepart"
+                >
                   Ville de départ
                 </label>
-                <input
-                  className="w-full rounded-md border border-gray-300 dark:border-gray-600 px-3 py-2 text-sm focus:border-primary focus:ring-primary dark:bg-gray-950 dark:text-gray-50"
+                <select
+                  className="w-full p-2 border border-gray-300 rounded-md bg-white maxw"
                   id="villeDepart"
                   name="villeDepart"
                   value={formData.villeDepart}
                   onChange={handleChange}
-                  placeholder="Entrez la ville de départ"
-                  type="text"
-                />
+                  required
+                >
+                  <option value="">Sélectionnez une ville</option>
+                  {cities.map((city) => (
+                    <option key={city} value={city}>
+                      {city}
+                    </option>
+                  ))}
+                </select>
               </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium" htmlFor="villeArriv">
+              <div>
+                <label
+                  className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                  htmlFor="villeArriv"
+                >
                   Ville d'arrivée
                 </label>
-                <input
-                  className="w-full rounded-md border border-gray-300 dark:border-gray-600 px-3 py-2 text-sm focus:border-primary focus:ring-primary dark:bg-gray-950 dark:text-gray-50"
+                <select
+                  className="w-full p-2 border border-gray-300 rounded-md bg-white"
                   id="villeArriv"
                   name="villeArriv"
                   value={formData.villeArriv}
                   onChange={handleChange}
-                  placeholder="Entrez la ville d'arrivée"
-                  type="text"
-                />
+                  required
+                >
+                  <option value="">Sélectionnez une ville</option>
+                  {cities.map((city) => (
+                    <option key={city} value={city}>
+                      {city}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
+
             <div>
               <label
                 className="block text-sm font-medium text-gray-700 dark:text-gray-300"

@@ -4,12 +4,10 @@ import { ColumnDef } from "@tanstack/react-table";
 export type Trajet = {
   id: string;
   villeDepart: string;
-  villeArrivee: string;
-  conducteur: string;
-  client: string;
-  marqueVoiture: string;
-  immatriculation: string;
-  // Ajouter d'autres propriétés au besoin
+  villeArriv: string;
+  driverName: string;
+  clientName: string;
+  prix: number;
 };
 
 // Définir les colonnes pour les données Trajet
@@ -23,24 +21,21 @@ export const columns: ColumnDef<Trajet>[] = [
     header: "Ville de départ",
   },
   {
-    accessorKey: "villeArrivee",
+    accessorKey: "villeArriv",
     header: "Ville d'arrivée",
   },
   {
-    accessorKey: "conducteur",
+    accessorKey: "driverName",
     header: "Conducteur",
   },
   {
-    accessorKey: "client",
+    accessorKey: "clientName",
     header: "Client",
   },
   {
-    accessorKey: "marqueVoiture",
-    header: "Marque de voiture",
+    accessorKey: "prix",
+    header: "Prix",
   },
-  {
-    accessorKey: "immatriculation",
-    header: "Immatriculation",
-  },
+
   // Ajouter d'autres colonnes au besoin
 ];

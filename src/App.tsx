@@ -30,17 +30,24 @@ import ConducteurDashboardLayoutPage from "./conducteur/conducteurDashboardLayou
 import ConducteurCreerOffre from "./conducteur/conducteurCreerOffre";
 import ConducteurMesOffres from "./conducteur/conducteurMesOffres";
 import ConducteurHistoriqueVoyages from "./conducteur/conducteurHistoriqueVoyages";
+import ClientRechargeComptePage from "./client/pages/ClientRechargeComptePage";
+import Error401Page from "./common/error401Page";
 
 const router = createBrowserRouter([
   {
     path: "/",
     errorElement: <Error404Page />, // catch-all 404, due to error bubbling. Works for now, need to catch other types of errors tho
+
     element: <AcceuilClient />,
   },
 
   {
     path: "/login",
     element: <LoginPage />,
+  },
+  {
+    path: "/unauthaurized-page",
+    element: <Error401Page />,
   },
   {
     path: "/test",
@@ -111,6 +118,7 @@ const router = createBrowserRouter([
         element: <ClientRechercheOffresPage />,
       },
       { path: "historique-voyages", element: <ClientHistoriqueVoyagesPage /> },
+      { path: "recharge-compte", element: <ClientRechargeComptePage /> },
     ],
   },
 ]);

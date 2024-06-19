@@ -209,6 +209,20 @@ class UserService {
     }
   }
 
+  static async getAllTrajets(token: string) {
+    try {
+      const response = await axios.get(
+        `${UserService.BASE_URL}/admin/get-all-trajets`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      return response.data;
+    } catch (err) {
+      throw err;
+    }
+  }
+
   // client only
   static async getAllOffresFiltered(
     {
@@ -232,6 +246,23 @@ class UserService {
       );
       return response.data;
     } catch (err) {
+      throw err;
+    }
+  }
+
+  static async recharcherCompte(soldeData: any, token: string) {
+    try {
+      console.log(soldeData, token);
+      const response = await axios.post(
+        `${UserService.BASE_URL}/user/add-solde`,
+        soldeData,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      return response.data;
+    } catch (err) {
+      console.log(err);
       throw err;
     }
   }

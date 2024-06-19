@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
 import { CarIcon, KeySquare } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function formatDate(inputDate) {
   const options = {
@@ -31,11 +32,14 @@ const ReservationCard = ({
     setTotalPrice(prix * placeReserv);
   }, [placeReserv, prix]);
 
+  const navigate = useNavigate();
+
   const onFormSubmit = (e) => {
     e.preventDefault();
     console.log("total price: ", totalPrice);
     console.log(villeArriv);
     handleSubmit(e, placeReserv, totalPrice);
+    navigate("/client/reservations");
   };
 
   return (
@@ -119,8 +123,8 @@ const ReservationCard = ({
                 <p className="text-sm text-gray-500">Prix total</p>
                 <p className="font-bold">MAD {prix * placeReserv}</p>
               </div>
-              <button className="w-32 h-11 rounded flex border-solid border text-white bg-green-800 mx-2 justify-center place-items-center">
-                <div className="">Reserver</div>
+              <button className="w-32 h-11 rounded flex border-solid border text-white bg-green-800 mx-2 justify-center place-items-center cursor-pointer">
+                Reserver
               </button>
             </div>
           </div>
