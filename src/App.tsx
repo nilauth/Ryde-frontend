@@ -32,6 +32,14 @@ import ConducteurMesOffres from "./conducteur/conducteurMesOffres";
 import ConducteurHistoriqueVoyages from "./conducteur/conducteurHistoriqueVoyages";
 import ClientRechargeComptePage from "./client/pages/ClientRechargeComptePage";
 import Error401Page from "./common/error401Page";
+import ForgotPasswordRequestPage from "./common/ForgotPasswordRequestPage";
+import OTPVerificationPage from "./common/OTPVerificationPage";
+import PasswordResetPage from "./common/PasswordResetPage";
+import Apropos from "./components/Apropos";
+import MentionsLegales from "./components/MentionsLegales";
+import PolitiqueConfidentialite from "./components/PolitiqueConfidentialite";
+import ContactPage from "./components/ContactPage";
+import CareersPage from "./components/CareersPage";
 
 const router = createBrowserRouter([
   {
@@ -57,6 +65,18 @@ const router = createBrowserRouter([
     path: "/register",
     element: <RegisterPage />,
   },
+  {
+    path: "/forgot-password",
+    element: <ForgotPasswordRequestPage />,
+  },
+  {
+    path: "/verify-otp",
+    element: <OTPVerificationPage />,
+  },
+  {
+    path: "/reset-password",
+    element: <PasswordResetPage />,
+  },
 
   // course routes
   {
@@ -72,6 +92,26 @@ const router = createBrowserRouter([
   {
     path: "/course/reservations",
     element: <ReservationClientPage />,
+  },
+  {
+    path: "/apropos",
+    element: <Apropos />,
+  },
+  {
+    path: "/mentions-legales",
+    element: <MentionsLegales />,
+  },
+  {
+    path: "/politique-confidentialite",
+    element: <PolitiqueConfidentialite />,
+  },
+  {
+    path: "/nous-contacter",
+    element: <ContactPage />,
+  },
+  {
+    path: "/carrieres",
+    element: <CareersPage />,
   },
 
   // admin routes
