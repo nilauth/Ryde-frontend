@@ -32,6 +32,7 @@ import ConducteurMesOffres from "./conducteur/conducteurMesOffres";
 import ConducteurHistoriqueVoyages from "./conducteur/conducteurHistoriqueVoyages";
 import ClientRechargeComptePage from "./client/pages/ClientRechargeComptePage";
 import Error401Page from "./common/error401Page";
+import DemandeConducteurPage from "./admin/pages/demandeConducteurPage";
 
 const router = createBrowserRouter([
   {
@@ -90,6 +91,7 @@ const router = createBrowserRouter([
       { path: "settings", element: <SettingsPage /> },
       { path: "analytics", element: <AnalyticsPage /> },
       { path: "payments", element: <PaymentsPage /> },
+      { path: "demande-conducteur", element: <DemandeConducteurPage /> },
     ],
   },
   // conducteur routes

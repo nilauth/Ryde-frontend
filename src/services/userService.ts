@@ -118,6 +118,20 @@ class UserService {
     }
   }
 
+  static async devenirConducteur(driverId: number, token: string) {
+    try {
+      const response = await axios.get(
+        `${UserService.BASE_URL}/user/request-driver/${driverId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      return response.data;
+    } catch (err) {
+      throw err;
+    }
+  }
+
   static async updateUser(
     userId: number,
     userData: UserDataType,
@@ -345,6 +359,36 @@ class UserService {
       return response.data;
     } catch (err) {
       throw err;
+    }
+  }
+
+  // demandes
+  static async getAllDemandes(token: string) {
+    try {
+      const response = await axios.get(
+        `${UserService.BASE_URL}/admin/get-all-demande`,
+
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      return response.data;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  static async accepterDemande(demandeId: string, token: string) {
+    try {
+      const response = await axios.get(
+        `${UserService.BASE_URL}/admin/becomeDriver/${demandeId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      throw error;
     }
   }
 }

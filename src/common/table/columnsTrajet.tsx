@@ -1,6 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
 
-// Définir la structure des données Trajet
 export type Trajet = {
   id: string;
   villeDepart: string;
@@ -10,7 +9,6 @@ export type Trajet = {
   prix: number;
 };
 
-// Définir les colonnes pour les données Trajet
 export const columns: ColumnDef<Trajet>[] = [
   {
     accessorKey: "id",
@@ -36,6 +34,4 @@ export const columns: ColumnDef<Trajet>[] = [
     accessorKey: "prix",
     header: "Prix",
   },
-
-  // Ajouter d'autres colonnes au besoin
 ];

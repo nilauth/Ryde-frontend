@@ -1,7 +1,4 @@
-import {
-  columns as trajetColonnes,
-  Trajet,
-} from "@/common/table/columnsTrajet"; // Supposons que vous avez un module pour les colonnes de trajet
+import { columns as rideColumns, Trajet } from "@/common/table/columnsTrajet";
 import { DataTable } from "@/common/table/data-table";
 import UserService from "@/services/userService";
 import { useEffect, useState } from "react";
@@ -14,7 +11,7 @@ const ListeTrajets = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchTrajects = async () => {
+    const fetchTrajets = async () => {
       try {
         const token = localStorage.getItem("token") || "";
         const res = await UserService.getAllTrajets(token);
@@ -22,12 +19,12 @@ const ListeTrajets = () => {
         setLoading(false);
         console.log(res);
       } catch (error) {
-        setError("Error fetching clients");
+        setError("Error fetching trajet");
         setLoading(false);
       }
     };
 
-    fetchTrajects();
+    fetchTrajets();
 
     return () => {};
   }, []);
@@ -41,7 +38,7 @@ const ListeTrajets = () => {
   }
   return (
     <div>
-      <DataTable columns={trajetColonnes} data={trajets} filerBy="driverName" />
+      <DataTable columns={rideColumns} data={trajets} filterBy="villeDepart" />
     </div>
   );
 };

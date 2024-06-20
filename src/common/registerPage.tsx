@@ -22,10 +22,23 @@ export default function RegisterPage() {
     cin: "",
     email: "",
     password: "",
-    role: "",
+    role: "USER",
     city: "",
     solde: 0,
   });
+
+  const cities = [
+    "Casablanca",
+    "Rabat",
+    "Fes",
+    "Marrakech",
+    "Tangier",
+    "Agadir",
+    "Meknes",
+    "Oujda",
+    "Kenitra",
+    "Tetouan",
+  ];
 
   const handleInputChange = (
     e:
@@ -128,6 +141,27 @@ export default function RegisterPage() {
                 />
               </div>
             </div>
+            <div>
+              <Label htmlFor="ville">Choisissez votre ville</Label>
+              <Select
+                onValueChange={(ville) =>
+                  handleInputChange({
+                    target: { value: ville, name: "city" },
+                  })
+                }
+                value={formData.city}
+                name="city"
+              >
+                <SelectTrigger className="">
+                  <SelectValue placeholder="Sélectionner votre ville" />
+                </SelectTrigger>
+                <SelectContent>
+                  {cities.map((city) => (
+                    <SelectItem value={city}>{city}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
             <div className="grid gap-2">
               <Label htmlFor="email">E-mail</Label>
               <Input
@@ -168,7 +202,9 @@ export default function RegisterPage() {
                 required
               />
             </div>
-            <div className="grid gap-2">
+            {/* choix de role - update: nouveau compte aura USER par defaut */}
+            {/* <input type="hidden" name="role" value={formData.role} /> */}
+            {/* <div className="grid gap-2">
               <Label htmlFor="role">Choisissez votre rôle</Label>
               <Select
                 onValueChange={(role) =>
@@ -186,19 +222,7 @@ export default function RegisterPage() {
                   <SelectItem value="ADMIN">Admin</SelectItem>
                 </SelectContent>
               </Select>
-            </div>
-            <div className="grid gap-2">
-              <Label htmlFor="ville">Ville</Label>
-              <Input
-                type="text"
-                name="city"
-                value={formData.city}
-                onChange={handleInputChange}
-                id="city"
-                placeholder="Fes"
-                required
-              />
-            </div>
+            </div> */}
 
             <Button type="submit" className="w-full">
               Créer un compte

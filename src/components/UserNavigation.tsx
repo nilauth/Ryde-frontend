@@ -6,18 +6,18 @@ import { useState } from "react";
 const UserNavigation = ({ isAuth }: { isAuth: boolean }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(isAuth);
   return (
-    <nav className='bg-white border flex'>
-      <div className='flex flex-wrap justify-between items-center mx-auto container p-5'>
-        <Link className='flex items-center gap-2 font-semibold' to='/'>
-          <img src='/src/assets/ribe.svg' className='h-8 w-8' />
-          <span className='text-2xl'>Ryde</span>
+    <nav className="bg-white border flex">
+      <div className="flex flex-wrap justify-between items-center mx-auto container p-5">
+        <Link className="flex items-center gap-2 font-semibold" to="/">
+          <img src="/src/assets/ribe.svg" className="h-8 w-8" />
+          <span className="text-2xl">Ryde</span>
         </Link>
 
-        <div className='items-center justify-between font-medium flex'>
+        <div className="items-center justify-between font-medium flex">
           {isLoggedIn ? (
             <UserNav />
           ) : (
-            <Link to='/login'>
+            <Link to="/login">
               <Button>S'authentifier</Button>
             </Link>
           )}

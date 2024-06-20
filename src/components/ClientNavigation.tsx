@@ -1,10 +1,51 @@
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+import UserService from "@/services/userService";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { UserNav } from "./UserNav";
+import { Button } from "./ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
+import { Dropdown } from "react-day-picker";
+import { BellIcon } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 const UserNavigation = ({ isAuth }: { isAuth: boolean }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(isAuth);
+  const [demandeEnvoye, setDemandeEnvoye] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const user = await UserService.getCurrentUser();
+        setCurrentUser(user);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await UserService.devenirConducteur(
+        currentUser.id,
+        localStorage.getItem("token") || ""
+      );
+      setDemandeEnvoye(true);
+    } catch (error) {
+      console.error("Error adding ride:", error);
+    }
+  };
 
   const { pathname } = useLocation();
 
@@ -116,6 +157,104 @@ const UserNavigation = ({ isAuth }: { isAuth: boolean }) => {
                 );
               })}
             </div>
+            <div className="h-full flex justify-center items-center w-52">
+              {demandeEnvoye ? (
+                <span className="text-sm">Demande envoyée</span>
+              ) : (
+                <Button onClick={handleSubmit}>Devenir conducteur</Button>
+              )}
+            </div>
+            <div className="flex h-full justify-center items-center px-4 pt-2">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="icon" className="relative">
+                    <BellIcon className="w-5 h-5" />
+                    <div className="absolute -top-1 -right-1 bg-red-500 text-red-50 rounded-full px-1.5 py-0.5 text-xs font-medium">
+                      3
+                    </div>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-80 p-4">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-lg font-semibold">Notifications</h3>
+                    <Button variant="ghost" size="icon">
+                      <XIcon className="w-4 h-4" />
+                    </Button>
+                  </div>
+                  <div className="space-y-4">
+                    <div className="flex items-start gap-3">
+                      <div className="flex-shrink-0">
+                        <Avatar className="w-10 h-10 border">
+                          <AvatarImage src="/placeholder-user.jpg" />
+                          <AvatarFallback>AC</AvatarFallback>
+                        </Avatar>
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-sm font-medium">
+                          <Link
+                            href="#"
+                            className="hover:underline"
+                            prefetch={false}
+                          >
+                            Acme Inc
+                          </Link>
+                          posted a new update.
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                          2 minutes ago
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <div className="flex-shrink-0">
+                        <Avatar className="w-10 h-10 border">
+                          <AvatarImage src="/placeholder-user.jpg" />
+                          <AvatarFallback>AC</AvatarFallback>
+                        </Avatar>
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-sm font-medium">
+                          <Link
+                            href="#"
+                            className="hover:underline"
+                            prefetch={false}
+                          >
+                            Acme Inc
+                          </Link>
+                          mentioned you in a comment.
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                          1 hour ago
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <div className="flex-shrink-0">
+                        <Avatar className="w-10 h-10 border">
+                          <AvatarImage src="/placeholder-user.jpg" />
+                          <AvatarFallback>AC</AvatarFallback>
+                        </Avatar>
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-sm font-medium">
+                          <Link
+                            href="#"
+                            className="hover:underline"
+                            prefetch={false}
+                          >
+                            Acme Inc
+                          </Link>
+                          shared a new post.
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                          3 hours ago
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
             {/* <button
@@ -172,4 +311,23 @@ const UserNavigation = ({ isAuth }: { isAuth: boolean }) => {
   );
 };
 
+function XIcon(props) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M18 6 6 18" />
+      <path d="m6 6 12 12" />
+    </svg>
+  );
+}
 export default UserNavigation;

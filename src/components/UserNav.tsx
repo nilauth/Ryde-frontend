@@ -75,9 +75,17 @@ export function UserNav() {
             <p className="text-sm font-medium leading-none">
               {currentUser.name}
             </p>
-            <p className="text-xs leading-none text-muted-foreground">
-              {currentUser.email}
-            </p>
+            <div className="grid grid-cols-2">
+              <p className="text-xs leading-none text-muted-foreground">
+                {currentUser.email}
+              </p>
+
+              {currentUser.role === "admin" ? (
+                <p className="text-xs leading-none text-muted-foreground text-end">
+                  Solde: {currentUser.solde} DH
+                </p>
+              ) : null}
+            </div>
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
