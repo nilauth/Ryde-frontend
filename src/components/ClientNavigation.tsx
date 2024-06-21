@@ -43,6 +43,10 @@ const UserNavigation = ({ isAuth }: { isAuth: boolean }) => {
       });
     } catch (error) {
       console.error("Error adding ride:", error);
+      toast({
+        description: "Erreur lors de l'envoi de la demande.",
+        status: "error",
+      });
     }
   };
 

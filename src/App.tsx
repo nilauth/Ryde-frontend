@@ -41,6 +41,7 @@ import MentionsLegales from "./components/MentionsLegales";
 import PolitiqueConfidentialite from "./components/PolitiqueConfidentialite";
 import ContactPage from "./components/ContactPage";
 import CareersPage from "./components/CareersPage";
+import { Toaster } from "./components/ui/toaster";
 
 const router = createBrowserRouter([
   {
