@@ -18,10 +18,12 @@ import {
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import UserService from "@/services/userService";
+import { useToast } from "@/components/ui/use-toast";
+import { cn } from "@/lib/utils";
 
 const ClientRechargeComptePage = () => {
   const [currentUser, setCurrentUser] = useState(null);
-
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
     id: "",
     nom: "",
@@ -61,9 +63,24 @@ const ClientRechargeComptePage = () => {
         },
         localStorage.getItem("token") || ""
       );
+      toast({
+        className: cn(
+          "top-100 right-0 flex fixed md:max-w-[420px] md:top-20 md:right-4"
+        ),
+        title: "Compte rechargé avec succès.",
+        description: `Votre compte a été rechargé de ${formData.solde} DH.`,
+      });
 
       console.log(await myFunction());
     } catch (error) {
+      toast({
+        className: cn(
+          "top-100 right-0 flex fixed md:max-w-[420px] md:top-20 md:right-4"
+        ),
+        variant: "destructive",
+        title: "Erreur lors de la recharge du compte.",
+        description: "Veuillez réessayer plus tard.",
+      });
       console.error("Error recharging account:", error);
     }
   };

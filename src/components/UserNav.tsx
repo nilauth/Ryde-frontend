@@ -80,7 +80,7 @@ export function UserNav() {
                 {currentUser.email}
               </p>
 
-              {currentUser.role === "admin" ? (
+              {currentUser.role === "USER" || "CONDUCTEUR" ? (
                 <p className="text-xs leading-none text-muted-foreground text-end">
                   Solde: {currentUser.solde} DH
                 </p>

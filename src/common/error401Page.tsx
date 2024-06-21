@@ -25,7 +25,7 @@ const Error401Page = () => {
           <span className="absolute inset-0 transition-transform translate-x-0.5 translate-y-0.5 bg-[#407bff] group-hover:translate-y-0 group-hover:translate-x-0"></span>
 
           <span className="text-2xl relative block px-8 py-3 border border-current font-bold text-white">
-            Revenir en accueil
+            Revenir
           </span>
         </Link>
       </button>

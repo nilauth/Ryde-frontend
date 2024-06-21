@@ -13,7 +13,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 export default function RegisterPage() {
-  // shit i added from the other frontend
+
 
   const navigate = useNavigate();
 
