@@ -75,13 +75,13 @@ export function UserNav() {
             <p className="text-sm font-medium leading-none">
               {currentUser.name}
             </p>
-            <div className="grid grid-cols-2">
-              <p className="text-xs leading-none text-muted-foreground">
+            <div className="flex flex-col">
+              <p className="text-xs leading-none text-muted-foreground pt-2">
                 {currentUser.email}
               </p>
 
               {currentUser.role === "USER" || "CONDUCTEUR" ? (
-                <p className="text-xs leading-none text-muted-foreground text-end">
+                <p className="text-xs leading-none text-muted-foreground pt-2">
                   Solde: {currentUser.solde} DH
                 </p>
               ) : null}
