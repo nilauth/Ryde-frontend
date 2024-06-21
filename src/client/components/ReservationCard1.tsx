@@ -1,6 +1,6 @@
 import { CarIcon, KeySquare } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 function formatDate(inputDate) {
   const options = {
@@ -32,14 +32,16 @@ const ReservationCard = ({
     setTotalPrice(prix * placeReserv);
   }, [placeReserv, prix]);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const onFormSubmit = (e) => {
     e.preventDefault();
     console.log("total price: ", totalPrice);
     console.log(villeArriv);
     handleSubmit(e, placeReserv, totalPrice);
-    navigate("/client/reservations");
+    // navigate only if solde is enough
+
+    // navigate("/client/reservations");
   };
 
   return (

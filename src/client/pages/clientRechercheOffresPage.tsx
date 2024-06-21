@@ -4,7 +4,9 @@ import UserService from "@/services/userService";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import ReservationCard from "../components/ReservationCard1";
-
+import { useToast } from "@/components/ui/use-toast";
+import { cn } from "@/lib/utils";
+import { useNavigate } from "react-router-dom";
 export default function ClientRechercheOffresPage() {
   const [formData, setFormData] = useState({
     villeDepart: "",
@@ -28,7 +30,8 @@ export default function ClientRechercheOffresPage() {
   const [currentUser, setCurrentUser] = useState(null);
   const [searchDone, setSearchDone] = useState(false);
   const [offers, setOffers] = useState([]);
-
+  const { toast } = useToast();
+  const navigate = useNavigate();
   useEffect(() => {
     async function fetchData() {
       try {
@@ -85,15 +88,33 @@ export default function ClientRechercheOffresPage() {
     // console.log(client_id, offre_id, placeReserv, totalPrice);
     console.log(offers);
     try {
-      const response = await axios.post(
-        `${UserService.BASE_URL}/user/add-reservation`,
-        { offreid: offre_id, userid: client_id, placeReserv, prix: totalPrice },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token") || ""}`,
+      // only if currentUser.solde > totalPrice
+      if (currentUser.solde < totalPrice) {
+        toast({
+          className: cn(
+            "top-100 right-0 flex fixed md:max-w-[420px] md:top-20 md:right-4"
+          ),
+          variant: "destructive",
+          title: "Solde insuffisant",
+          description: "Votre solde est insuffisant pour cette réservation.",
+        });
+      } else {
+        const response = await axios.post(
+          `${UserService.BASE_URL}/user/add-reservation`,
+          {
+            offreid: offre_id,
+            userid: client_id,
+            placeReserv,
+            prix: totalPrice,
           },
-        }
-      );
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token") || ""}`,
+            },
+          }
+        );
+        navigate("/client/reservations");
+      }
       // console.log(currentUser);
       // console.log(response);
       console.log("total price2:", totalPrice);
