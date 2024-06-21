@@ -17,20 +17,29 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [userRole, setUserRole] = useState<string | null>(null);
+  const [userRole, setUserRole] = useState<string | null>(() => {
+    return localStorage.getItem("role");
+  });
 
   const fetchUserRole = async () => {
     try {
-      const response = await UserService.getCurrentUser();
-      console.log(response.role);
-      setUserRole(response.role);
+      const user = await UserService.getCurrentUser();
+      const role = user.role;
+      setUserRole(role);
+      localStorage.setItem("role", role);
     } catch (error) {
-      console.error("Failed to fetch user role", error);
+      console.error("Failed to fetch user role:", error);
+      setUserRole(null);
     }
   };
 
   useEffect(() => {
-    fetchUserRole();
+    const storedRole = localStorage.getItem("role");
+    if (storedRole) {
+      setUserRole(storedRole);
+    } else {
+      fetchUserRole();
+    }
   }, []);
 
   return (

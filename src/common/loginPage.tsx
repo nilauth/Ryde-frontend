@@ -29,7 +29,7 @@ export default function LoginPage() {
         //depending on the role navigate to the appropriate dashboard
         if (userData.role === "USER") navigate("/client");
         else if (userData.role === "CONDUCTEUR") navigate("/conducteur");
-        else navigate("/admin/dashboard");
+        else if (userData.role === "ADMIN") navigate("/admin/dashboard");
       } else {
         setError(userData.message);
       }

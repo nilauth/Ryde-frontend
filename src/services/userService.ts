@@ -391,6 +391,20 @@ class UserService {
       throw error;
     }
   }
+
+  static async refuserDemande(demandeId: string, token: string) {
+    try {
+      const response = await axios.get(
+        `${UserService.BASE_URL}/admin/stayUser/${demandeId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
   // Forgot Password functionality
 
   static async requestPasswordReset(email: string) {
