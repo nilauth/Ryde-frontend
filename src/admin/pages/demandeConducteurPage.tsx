@@ -12,7 +12,7 @@ const DemandeConducteurPage = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchClients = async () => {
+    const fetchDemandes = async () => {
       try {
         const token = localStorage.getItem("token") || "";
         const res = await UserService.getAllDemandes(token);
@@ -20,12 +20,12 @@ const DemandeConducteurPage = () => {
         console.log(demandes);
         setLoading(false);
       } catch (error) {
-        setError("Error fetching clients");
+        setError("Error fetching demandes");
         setLoading(false);
       }
     };
 
-    fetchClients();
+    fetchDemandes();
 
     return () => {};
   }, []);

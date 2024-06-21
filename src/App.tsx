@@ -33,6 +33,7 @@ import ConducteurHistoriqueVoyages from "./conducteur/conducteurHistoriqueVoyage
 import ClientRechargeComptePage from "./client/pages/ClientRechargeComptePage";
 import Error401Page from "./common/error401Page";
 import DemandeConducteurPage from "./admin/pages/demandeConducteurPage";
+import { Toaster } from "./components/ui/toaster";
 
 const router = createBrowserRouter([
   {
@@ -126,6 +127,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <RouterProvider router={router} />
+      <Toaster />
+    </>
+  );
 }
 export default App;

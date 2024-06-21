@@ -9,7 +9,7 @@ export type Demande = {
   nomDriver: string;
 };
 
-const handleSubmit = async (
+const handleSubmitAccepter = async (
   e: React.MouseEvent<HTMLButtonElement>,
   rowId: string,
   token = localStorage.getItem("token") || ""
@@ -22,7 +22,24 @@ const handleSubmit = async (
     //  reload the page
     window.location.reload();
   } catch (error) {
-    console.log(error); 
+    console.log(error);
+  }
+};
+
+const handleSubmitRefuser = async (
+  e: React.MouseEvent<HTMLButtonElement>,
+  rowId: string,
+  token = localStorage.getItem("token") || ""
+) => {
+  e.preventDefault();
+  console.log(rowId);
+
+  try {
+    await UserService.refuserDemande(rowId, token);
+    //  reload the page
+    window.location.reload();
+  } catch (error) {
+    console.log(error);
   }
 };
 
@@ -74,11 +91,16 @@ export const columns: ColumnDef<Demande>[] = [
           <div className="space-x-5 flex justify-end">
             <Button
               variant="outline"
-              onClick={(e) => handleSubmit(e, demande.id)}
+              onClick={(e) => handleSubmitAccepter(e, demande.id)}
             >
               Accepter
             </Button>
-            <Button variant="outline">Refuser</Button>
+            <Button
+              variant="outline"
+              onClick={(e) => handleSubmitRefuser(e, demande.id)}
+            >
+              Refuser
+            </Button>
           </div>
         )
       );

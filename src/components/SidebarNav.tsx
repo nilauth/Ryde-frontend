@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import UserService from "@/services/userService";
 import {
   Blend,
   Car,
@@ -7,11 +8,29 @@ import {
   Users,
   UsersRound,
 } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 export function SidebarNav() {
   const { pathname } = useLocation();
 
+  const [nombreDemandes, setNombreDemandes] = useState(0);
+
+  useEffect(() => {
+    const fetchDemandes = async () => {
+      try {
+        const token = localStorage.getItem("token") || "";
+        const res = await UserService.getAllDemandes(token);
+        // setNombreDemandes only if status is 'pending'
+        const demandes = res.filter((demande) => demande.status === "pending");
+        setNombreDemandes(demandes.length);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchDemandes();
+  }, []);
   const links = [
     { to: "/admin/dashboard", icon: Blend, text: "Aperçu général" },
     {
@@ -59,7 +78,7 @@ export function SidebarNav() {
           {link.text}
           {link.to === "/admin/dashboard/demande-conducteur" ? (
             <span className="inline-flex items-center justify-center w-5 h-5 ms-2 text-xs font-semibold text-blue-800 bg-blue-200 rounded-full">
-              10
+              {nombreDemandes}
             </span>
           ) : (
             ""
