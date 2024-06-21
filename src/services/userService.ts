@@ -391,6 +391,47 @@ class UserService {
       throw error;
     }
   }
+  // Forgot Password functionality
+
+  static async requestPasswordReset(email: string) {
+    try {
+      const response = await axios.post(
+        `${UserService.BASE_URL}/forgotPassword/verifyMail/${email}`
+      );
+      return response.data;
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+  }
+
+  static async verifyOtp(email: string, otp: string) {
+    try {
+      const response = await axios.post(
+        `${UserService.BASE_URL}/forgotPassword/verifyOtp/${otp}/${email}`
+      );
+      return response.data;
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+  }
+
+  static async resetPassword(email: string, password: string, repeatPassword: string) {
+    try {
+      const response = await axios.post(
+        `${UserService.BASE_URL}/forgotPassword/changePassword/${email}`,
+        {
+          password: password,
+          repeatPassword: repeatPassword,
+        }
+      );
+      return response.data;
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+  }
 }
 
 export default UserService;
