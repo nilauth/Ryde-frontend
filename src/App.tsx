@@ -42,6 +42,8 @@ import PolitiqueConfidentialite from "./components/PolitiqueConfidentialite";
 import ContactPage from "./components/ContactPage";
 import CareersPage from "./components/CareersPage";
 import { Toaster } from "./components/ui/toaster";
+import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -56,7 +58,7 @@ const router = createBrowserRouter([
     element: <LoginPage />,
   },
   {
-    path: "/unauthaurized-page",
+    path: "/unauthorized-page",
     element: <Error401Page />,
   },
   {
@@ -119,7 +121,11 @@ const router = createBrowserRouter([
   // admin routes
   {
     path: "/admin/dashboard",
-    element: <AdminDashboardLayoutPage />,
+    element: (
+      <ProtectedRoute role="ADMIN">
+        <AdminDashboardLayoutPage />
+      </ProtectedRoute>
+    ),
     children: [
       { path: "overview", element: <DashboardOverviewPage /> },
       { path: "profile", element: <AdminProfile /> },
@@ -169,8 +175,10 @@ const router = createBrowserRouter([
 function App() {
   return (
     <>
-      <RouterProvider router={router} />
-      <Toaster />
+      <AuthProvider>
+        <RouterProvider router={router} />
+        <Toaster />
+      </AuthProvider>
     </>
   );
 }

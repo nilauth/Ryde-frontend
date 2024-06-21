@@ -1,7 +1,11 @@
-import ReservationCard from "../components/ReservationCard1";
+import { AuthProvider } from "@/context/AuthContext";
 
 const testPage = () => {
-  return <ReservationCard />;
+  return (
+    <AuthProvider>
+      <div></div>
+    </AuthProvider>
+  );
 };
 
 export default testPage;
