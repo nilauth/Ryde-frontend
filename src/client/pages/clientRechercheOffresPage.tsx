@@ -185,29 +185,33 @@ export default function ClientRechercheOffresPage() {
           {searchDone && offers.length === 0 && (
             <p className="text-center text-gray-500">Aucune offre trouvée</p>
           )}
-          {offers.map((offer) => (
-            <ReservationCard
-              key={offer.id}
-              id={offer.id}
-              date={offer.date}
-              driverId={offer.driverId}
-              placeDispo={offer.placeDispo}
-              prix={offer.prix}
-              villeDepart={offer.villeDepart}
-              villeArriv={offer.villeArriv}
-              heureDepart={offer.heureDepart}
-              heureArriv={offer.heureArriv}
-              handleSubmit={(e, placeReserv, totalPrice) =>
-                handleCardSubmit(
-                  e,
-                  placeReserv,
-                  totalPrice,
-                  currentUser.id,
-                  offer.id
-                )
-              }
-            />
-          ))}
+          {offers.map(
+            (offer) =>
+              // show only if placeDispo > 0
+              offer.placeDispo > 0 && (
+                <ReservationCard
+                  key={offer.id}
+                  id={offer.id}
+                  date={offer.date}
+                  driverId={offer.driverId}
+                  placeDispo={offer.placeDispo}
+                  prix={offer.prix}
+                  villeDepart={offer.villeDepart}
+                  villeArriv={offer.villeArriv}
+                  heureDepart={offer.heureDepart}
+                  heureArriv={offer.heureArriv}
+                  handleSubmit={(e, placeReserv, totalPrice) =>
+                    handleCardSubmit(
+                      e,
+                      placeReserv,
+                      totalPrice,
+                      currentUser.id,
+                      offer.id
+                    )
+                  }
+                />
+              )
+          )}
         </ScrollArea>
       </main>
     </>
