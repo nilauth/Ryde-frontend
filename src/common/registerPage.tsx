@@ -13,8 +13,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 export default function RegisterPage() {
-
-
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -67,7 +65,6 @@ export default function RegisterPage() {
         localStorage.setItem("token", userData.token);
         localStorage.setItem("role", userData.role);
         // Navigate to the user's profile page
-        navigate("/profile");
       } else {
         console.log(userData.message);
       }
@@ -83,7 +80,7 @@ export default function RegisterPage() {
         solde: 0,
       });
       alert("L'utilisateur a été enregistré avec succès.");
-      navigate("/admin/dashboard");
+      navigate("/client");
     } catch (error) {
       console.error("Erreur lors de l'inscription de l'utilisateur :", error);
       alert("Une erreur s'est produite lors de l'inscription de l'utilisateur");
