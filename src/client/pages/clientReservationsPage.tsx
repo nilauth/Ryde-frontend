@@ -21,6 +21,7 @@ const ClientReservationsPage = () => {
             console.log(reservation);
             return reservation.statusVoyages === true;
           });
+
           setReservationList(filteredResList);
         }
       } catch (error) {

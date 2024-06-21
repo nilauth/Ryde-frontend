@@ -417,7 +417,11 @@ class UserService {
     }
   }
 
-  static async resetPassword(email: string, password: string, repeatPassword: string) {
+  static async resetPassword(
+    email: string,
+    password: string,
+    repeatPassword: string
+  ) {
     try {
       const response = await axios.post(
         `${UserService.BASE_URL}/forgotPassword/changePassword/${email}`,
