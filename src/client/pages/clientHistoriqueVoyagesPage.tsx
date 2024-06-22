@@ -40,6 +40,7 @@ const clientHistoriqueVoyagesPage = () => {
             {reservationList.map((reservation, index) => (
               <li key={index} className="w-1/3">
                 <ReservationCardDone
+                  statusVoyage={reservation.statusVoyages}
                   id={reservation.id}
                   date={reservation.date}
                   driverId={reservation.driverId}

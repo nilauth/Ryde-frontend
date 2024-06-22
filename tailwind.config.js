@@ -17,6 +17,15 @@ module.exports = {
       },
     },
     extend: {
+      keyframes: {
+        fadeIn: {
+          "0%": { opacity: 0 },
+          "100%": { opacity: 1 },
+        },
+      },
+      animation: {
+        fadeIn: "fadeIn 500ms ease-in-out",
+      },
       fontFamily: {
         cormorant: ["Cormorant Garamond", "serif"],
       },

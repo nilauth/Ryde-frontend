@@ -27,9 +27,14 @@ export default function LoginPage() {
         localStorage.setItem("token", userData.token);
         localStorage.setItem("role", userData.role);
         //depending on the role navigate to the appropriate dashboard
-        if (userData.role === "USER") navigate("/client");
-        else if (userData.role === "CONDUCTEUR") navigate("/conducteur");
-        else if (userData.role === "ADMIN") navigate("/admin/dashboard");
+        if (userData.role === "ADMIN") {
+          // refresh the page
+          window.location.reload();
+          navigate("/admin/dashboard");
+          window.location.reload();
+          navigate("/admin/dashboard");
+        } else if (userData.role === "CONDUCTEUR") navigate("/conducteur");
+        else if (userData.role === "USER") navigate("/client");
       } else {
         setError(userData.message);
       }

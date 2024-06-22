@@ -26,6 +26,7 @@ const ReservationCardDone = ({
   idReservation,
   token, // Make sure the token is passed as a prop
   onDelete, // Callback to refresh the reservations list
+  statusVoyage,
 }) => {
   const [loading, setLoading] = useState(false);
 
@@ -99,18 +100,22 @@ const ReservationCardDone = ({
           <div className="md:border-l-2 mx-6 md:border-dotted flex flex-row py-4 mr-6 flex-wrap w-full justify-between">
             <div className="text-sm mx-2 flex flex-col">
               <p>Ticket Flexible</p>
-              <p className="font-bold">MAD {prix + 200}</p>
+              <p className="font-bold">MAD {prix}</p>
               <p className="text-xs text-gray-500">Remboursable</p>
             </div>
-            <button
-              onClick={handleDelete}
-              disabled={loading}
-              className={`w-32 h-11 rounded flex border-solid border ${
-                loading ? "bg-gray-400" : "bg-slate-600 text-white"
-              } mx-2 justify-center place-items-center self-center`}
-            >
-              {loading ? "Annuler..." : "Annuler"}
-            </button>
+            {statusVoyage ? (
+              <button
+                onClick={handleDelete}
+                disabled={loading}
+                className={`w-32 h-11 rounded flex border-solid border ${
+                  loading ? "bg-gray-400" : "bg-slate-600 text-white"
+                } mx-2 justify-center place-items-center self-center`}
+              >
+                {loading ? "Annuler..." : "Annuler"}
+              </button>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>
