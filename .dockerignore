@@ -1,0 +1,22 @@
+# Ignore node_modules directory
+node_modules
+
+# Ignore build directory (if it exists)
+build
+
+# Ignore Docker ignore file itself
+.dockerignore
+
+# Ignore Dockerfile to prevent accidental copying
+Dockerfile
+Dockerfile.prod
+
+# Ignore other potential development artifacts
+*.log
+*.md
+*.tsbuildinfo
+.vscode/
+.idea/
+.env
+.env.local
+.env.*.local
