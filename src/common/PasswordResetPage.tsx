@@ -47,9 +47,9 @@ export default function PasswordResetPage() {
     <div className="w-full h-screen flex items-center justify-center">
       <form className="mx-auto grid w-[350px] gap-6" onSubmit={handleSubmit}>
         <div className="grid gap-2 text-center ">
-          <h1 className="text-3xl font-bold">Reset Password</h1>
+          <h1 className="text-3xl font-bold">Réinitialisation de mot de passe</h1>
           <p className="text-muted-foreground">
-            Enter your new password below to reset it.
+            Entrez votre nouveau mot de passe pour le réinitialiser.
           </p>
         </div>
         <div className="grid gap-4">
@@ -65,7 +65,7 @@ export default function PasswordResetPage() {
             />
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="password">New Password</Label>
+            <Label htmlFor="password">Nouveau mot de passe</Label>
             <Input
               id="password"
               type="password"
@@ -76,7 +76,7 @@ export default function PasswordResetPage() {
             />
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="repeatPassword">Repeat New Password</Label>
+            <Label htmlFor="repeatPassword">Confirmez le nouveau mot de passe</Label>
             <Input
               id="repeatPassword"
               type="password"
@@ -87,7 +87,7 @@ export default function PasswordResetPage() {
             />
           </div>
           <Button type="submit" className="w-full">
-            Reset Password
+            Réinitialiser le mot de passe
           </Button>
           {error && <p className="text-xs text-red-500">{error}</p>}
         </div>

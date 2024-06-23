@@ -37,9 +37,9 @@ export default function OTPVerificationPage() {
     <div className="w-full h-screen flex items-center justify-center">
       <form className="mx-auto grid w-[350px] gap-6" onSubmit={handleSubmit}>
         <div className="grid gap-2 text-center ">
-          <h1 className="text-3xl font-bold">Verify OTP</h1>
+          <h1 className="text-3xl font-bold">Vérification de l'OTP</h1>
           <p className="text-muted-foreground">
-            Enter the OTP sent to your email to verify your identity.
+            Entrez l'OTP envoyé à votre adresse email pour vérifier votre identité.
           </p>
         </div>
         <div className="grid gap-4">
@@ -59,7 +59,7 @@ export default function OTPVerificationPage() {
             <Input
               id="otp"
               type="text"
-              placeholder="Enter OTP"
+              placeholder="Entrez l'OTP"
               required
               value={otp}
               onChange={(e) => setOtp(e.target.value)}
@@ -68,7 +68,7 @@ export default function OTPVerificationPage() {
             <Input id="email" type="hidden" value={email} />
           </div>
           <Button type="submit" className="w-full">
-            Verify OTP
+            Vérification de l'OTP
           </Button>
           {message && <p className="text-xs text-green-500">{message}</p>}
           {error && <p className="text-xs text-red-500">{error}</p>}

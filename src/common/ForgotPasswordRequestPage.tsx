@@ -33,9 +33,9 @@ export default function ForgotPasswordRequestPage() {
     <div className='w-full h-screen flex items-center justify-center'>
       <form className='mx-auto grid w-[350px] gap-6' onSubmit={handleSubmit}>
         <div className='grid gap-2 text-center '>
-          <h1 className='text-3xl font-bold'>Forgot Password</h1>
+          <h1 className='text-3xl font-bold'>Mot de passe oublié</h1>
           <p className='text-muted-foreground'>
-            Enter your email below to receive a password reset link.
+            Entrez votre email pour recevoir un lien de réinitialisation de mot de passe.
           </p>
         </div>
         <div className='grid gap-4'>
@@ -51,7 +51,7 @@ export default function ForgotPasswordRequestPage() {
             />
           </div>
           <Button type='submit' className='w-full'>
-            Send Verification Email
+          Envoyer l'email de vérification
           </Button>
           {message && <p className='text-xs text-green-500'>{message}</p>}
           {error && <p className='text-xs text-red-500'>{error}</p>}

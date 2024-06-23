@@ -10,19 +10,19 @@ const Footer = () => {
           <span className='text-xl font-bold'>Ryde</span>
         </div>
         <nav className='flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4'>
-          <Link className='hover:underline' to='#'>
+          <Link className='hover:underline' to='/mentions-legales'>
             Mentions légales
           </Link>
-          <Link className='hover:underline' to='#'>
+          <Link className='hover:underline' to='/politique-confidentialite'>
             Politique de confidentialité
           </Link>
-          <Link className='hover:underline' to='#'>
+          <Link className='hover:underline' to='/nous-contacter'>
             Nous contacter
           </Link>
-          <Link className='hover:underline' to='#'>
+          <Link className='hover:underline' to='/apropos'>
             À propos
           </Link>
-          <Link className='hover:underline' to='#'>
+          <Link className='hover:underline' to='/carrieres'>
             Carrières
           </Link>
         </nav>

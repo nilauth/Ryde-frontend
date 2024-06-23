@@ -36,7 +36,7 @@ export function SidebarNav() {
     {
       to: "/admin/dashboard/clients",
       icon: Users,
-      text: "Liste des clients",
+      text: "Liste des passagers",
     },
     {
       to: "/admin/dashboard/drivers",

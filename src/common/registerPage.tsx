@@ -26,11 +26,12 @@ export default function RegisterPage() {
   });
 
   const cities = [
+    "Azrou",
     "Casablanca",
     "Rabat",
     "Fes",
     "Marrakech",
-    "Tangier",
+    "Tanger",
     "Agadir",
     "Meknes",
     "Oujda",

@@ -103,7 +103,7 @@ export default function Component() {
     <div className="flex justify-center items-center mt-20">
       <div className="dark:bg-gray-800 shadow-lg rounded-lg p-8 w-full max-w-2xl border">
         <h1 className="text-4xl  mb-4 dark:text-gray-100 uppercase tracking-wide font-extrabold text-center pb-5">
-          Créer un nouveau offre
+          Créer une nouvelle offre
         </h1>
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
@@ -228,7 +228,7 @@ export default function Component() {
                 className="block text-sm font-medium text-gray-700 dark:text-gray-300"
                 htmlFor="placeDispo"
               >
-                Nombres de place
+                Nombre de places
               </label>
               <input
                 name="placeDispo"
