@@ -32,7 +32,7 @@ export function SidebarNav() {
     fetchDemandes();
   }, []);
   const links = [
-    { to: "/admin/dashboard", icon: Blend, text: "Aperçu général" },
+    // { to: "/admin/dashboard", icon: Blend, text: "Aperçu général" },
     {
       to: "/admin/dashboard/clients",
       icon: Users,
@@ -48,11 +48,11 @@ export function SidebarNav() {
       icon: Car,
       text: "Trajets effectués",
     },
-    {
-      to: "/admin/dashboard/payments",
-      icon: CreditCard,
-      text: "Historique des payements",
-    },
+    // {
+    //   to: "/admin/dashboard/payments",
+    //   icon: CreditCard,
+    //   text: "Historique des payements",
+    // },
     {
       to: "/admin/dashboard/demande-conducteur",
       icon: UserPlus,
