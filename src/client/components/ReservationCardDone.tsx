@@ -43,7 +43,10 @@ const ReservationCardDone = ({
         idReservation,
         prix,
         localStorage.getItem("token") || ""
+
       );
+      // reload page  after delete
+      window.location.reload();
       console.log("Delete successful");
       // onDelete(id); // Call the callback function to refresh the reservations list
     } catch (err) {
